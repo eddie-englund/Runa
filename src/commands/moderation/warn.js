@@ -1,6 +1,10 @@
-const { Command } = require('discord-akairo');
+const {
+    Command
+} = require('discord-akairo');
 const User = require('../../models/user');
-const { main } = require('../../../colors.json');
+const {
+    main
+} = require('../../../colors.json');
 
 
 
@@ -11,14 +15,19 @@ class warnCommand extends Command {
             clientPermissions: ['KICK_MEMBERS'],
             userPermissions: ['KICK_MEMBERS'],
             channelRestriction: 'guild',
-            args: [
-                {
+            category: 'moderation',
+            description: {
+                content: 'Warns a user',
+                usage: ['!warn <@user> <reason>']
+            },
+            args: [{
                     id: 'member',
                     type: 'memberMention'
                 },
                 {
                     id: 'reason',
-                    match: 'rest'
+                    match: 'rest',
+                    default: ''
                 }
             ]
         });
@@ -26,11 +35,10 @@ class warnCommand extends Command {
 
     async exec(message, args) {
         if (!args.member) return message.reply('Please, provide a vaild user.');
-        if (!args.reason) return message.reply('Please, provide a reason for warning this user');
         if (args.member.user.bot) return message.reply('Warning bots is prohibited.');
         const today = new Date();
-        
-            const embed = this.client.util.embed()
+
+        const embed = this.client.util.embed()
             .setColor(main)
             .setAuthor(`${args.member.user.username} has been warned`, args.member.user.displayAvatarURL)
             .addField('**UserID**:', args.member.user.id, true)
@@ -85,13 +93,11 @@ class warnCommand extends Command {
                     username: args.member.user.name,
                     guildID: message.guild.id,
                     warnings: 1,
-                    warners: [
-                        {
-                            userID: message.author.id,
-                            username: message.author.username,
-                            date: today
-                        }
-                    ],
+                    warners: [{
+                        userID: message.author.id,
+                        username: message.author.username,
+                        date: today
+                    }],
                     warnDate: today,
                     reports: 0,
                     reporters: [],
@@ -109,10 +115,10 @@ class warnCommand extends Command {
                 res.warnDate.push(today);
                 switch (res.warnings) {
                     case 3:
-                        args.member.kick().catch(e => new Error('Failed to kicked user', e)).then(kickMessageEmbed());
+                        args.member.kick().then(kickMessageEmbed()).catch(e => new Error('Failed to kicked user', e));
                 }
 
-                return res.save().catch(e => new Error('res.save at warn.js failed to save',e)).then(send()).catch(e => new Error('Faile to kick user', e));
+                return res.save().catch(e => new Error('res.save at warn.js failed to save', e)).then(send()).catch(e => new Error('Faile to kick user', e));
             }
         });
     }

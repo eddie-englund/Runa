@@ -1,5 +1,9 @@
-const { AkairoClient } = require('discord-akairo');
-const { config } = require('dotenv');
+const {
+    AkairoClient
+} = require('discord-akairo');
+const {
+    config
+} = require('dotenv');
 config();
 const client = new AkairoClient({
     ownerID: process.env.ownerID,
@@ -7,12 +11,13 @@ const client = new AkairoClient({
     emitters: {
         process
     },
+    blockBots: true,
     defaultCooldown: 2500,
     allowMention: false,
     commandDirectory: './commands/',
     listenerDirectory: './events/'
 }, {
-        disableEveryone: true
-    });
+    disableEveryone: true
+});
 
 client.login(process.env.TOKEN);

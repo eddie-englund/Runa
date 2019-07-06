@@ -1,7 +1,11 @@
-const { Listener } = require('discord-akairo');
-const { connect } = require('mongoose');
+const {
+    Listener
+} = require('discord-akairo');
+const {
+    connect
+} = require('mongoose');
 
-class readyEvent extends Listener{
+class readyEvent extends Listener {
     constructor() {
         super('ready', {
             emitter: 'client',
@@ -9,11 +13,11 @@ class readyEvent extends Listener{
         });
     }
 
-    async exec () {
-           await connect('mongodb://localhost:27017/Yamete', {
-               useNewUrlParser: true
-           });
-           console.log('Yamete bot is ready');
+    async exec() {
+        await connect('mongodb://localhost:27017/Yamete', {
+            useNewUrlParser: true
+        });
+        console.log('Runa bot is ready');
     }
 }
 

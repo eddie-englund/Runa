@@ -1,6 +1,10 @@
-const { Command } = require('discord-akairo');
+const {
+    Command
+} = require('discord-akairo');
 const User = require('../../models/user');
-const { main } = require('../../../colors.json');
+const {
+    main
+} = require('../../../colors.json');
 
 class banCommand extends Command {
     constructor() {
@@ -9,8 +13,12 @@ class banCommand extends Command {
             clientPermissions: ['BAN_MEMBERS'],
             userPermissions: ['BAN_MEMBERS'],
             channelRestriction: 'guild',
-            args: [
-                {
+            category: 'moderation',
+            description: {
+                content: 'Bans a user',
+                usage: ['!ban <@user> <reason>']
+            },
+            args: [{
                     id: 'member',
                     type: 'memberMention'
                 },
@@ -18,15 +26,15 @@ class banCommand extends Command {
                     id: 'reason',
                     type: 'string',
                     match: 'rest',
-                    default: ''
+                    default: 'No reason defined'
                 }
             ]
         });
     }
 
-    async exec (message, args) {
+    async exec(message, args) {
         if (!args.member) return message.reply('You need to include a user!');
-        
+
         const today = new Date;
         const embed = this.client.util.embed()
             .setColor(main)
@@ -42,7 +50,7 @@ class banCommand extends Command {
             .setFooter(`Warned by ${message.author.username}, id: ${message.author.id}`);
 
         function banEmbedFunction() {
-            message.channel.send(`Banned user: ${args.member.username}`);
+            message.channel.send(`Banned user: ${args.member.user.username}`);
             const modLogs = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
             const logs = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'logs');
 
@@ -54,7 +62,7 @@ class banCommand extends Command {
                 return;
             }
         }
-        
+
         User.findOne({
             guildID: message.guild.id,
             userID: args.member.user.id
@@ -65,11 +73,13 @@ class banCommand extends Command {
             } else {
                 args.member.ban();
                 return res.deleteOne({
-                    userID: args.mebmer.user.id,
+                    userID: args.member.user.id,
                     guildID: message.author.id
-                }).then(res.save().catch(e => new Error('Failed deleted user at line 40 ban.js', e))).then(banEmbedFunction());
+                }).then(res.save()).then(banEmbedFunction()).catch(e => new Error('Failed deleted user at line 40 ban.js', e));
             }
-        }); 
-        
+        });
+
     }
 }
+
+module.exports = banCommand;
