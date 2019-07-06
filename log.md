@@ -24,3 +24,11 @@ Finished the Warn command and fixed db model issues.
 ### 22:59 06/06/2019
 
 Found bug in warn command. It does not kick the user after three warnings.
+
+I belive all issues are fixed.
+
+added:
+*   bot/help
+*   moderation/clear
+*   moderation/ban
+*   events/commandBlocked
