@@ -1,9 +1,8 @@
 const { Command } = require('discord-akairo');
 const User = require('../../models/user');
+const { main } = require('../../../colors.json');
 
-/**
- * @todo Test command and complete it.
- */
+
 
 class warnCommand extends Command {
     constructor() {
@@ -11,6 +10,7 @@ class warnCommand extends Command {
             aliases: ['warn'],
             clientPermissions: ['KICK_MEMBERS'],
             userPermissions: ['KICK_MEMBERS'],
+            channelRestriction: 'guild',
             args: [
                 {
                     id: 'member',
@@ -31,15 +31,17 @@ class warnCommand extends Command {
         const today = new Date();
         
             const embed = this.client.util.embed()
+            .setColor(main)
             .setAuthor(`${args.member.user.username} has been warned`, args.member.user.displayAvatarURL)
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)
             .addField('**User Discriminator**:', args.member.user.discriminator, true)
-            .addField('**User CreatedAt', args.member.user.createdAt, true)
+            .addField('**User CreatedAt**', args.member.user.createdAt, true)
             .setTimestamp(today)
             .setFooter(`Warned by ${message.author.username}, id: ${message.author.id}`);
 
         const kickEmbed = this.client.util.embed()
+            .setColor(main)
             .setAuthor(`Kicked user ${args.member.user.username}`, args.member.user.displayAvatarURL)
             .addField('**User**:', args.member.user.username, true)
             .addField('**UserID**:', args.member.user.id, true)
@@ -68,7 +70,7 @@ class warnCommand extends Command {
             channel(embed);
         }
 
-        function kick() {
+        function kickMessageEmbed() {
             channel(kickEmbed);
         }
 
@@ -105,10 +107,9 @@ class warnCommand extends Command {
                     date: today
                 });
                 res.warnDate.push(today);
-                console.log(args.member);
                 switch (res.warnings) {
                     case 3:
-                        args.member.kick().catch(e => new Error('Failed to kicked user', e)).then(kick());
+                        args.member.kick().catch(e => new Error('Failed to kicked user', e)).then(kickMessageEmbed());
                 }
 
                 return res.save().catch(e => new Error('res.save at warn.js failed to save',e)).then(send()).catch(e => new Error('Faile to kick user', e));
