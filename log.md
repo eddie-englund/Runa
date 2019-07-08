@@ -17,11 +17,11 @@ Began with:
 Notes for next time:
 Complete the warn command. Test it and make sure db is working correctly.
 
-### 14:03 06/06/2019
+### 14:03 06/07/2019
 
 Finished the Warn command and fixed db model issues.
 
-### 22:59 06/06/2019
+### 22:59 06/07/2019
 
 Found bug in warn command. It does not kick the user after three warnings.
 
@@ -32,3 +32,10 @@ added:
 *   moderation/clear
 *   moderation/ban
 *   events/commandBlocked
+
+### 08:16 08/07/2019
+
+Added:
+*   guildRemove
+
+The guildRemove event will drop all guild related instances/documents a day after the bot left he guild.
