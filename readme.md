@@ -3,8 +3,8 @@
 # Runa
 
 [![Build Status](https://travis-ci.org/dragonfire535/xiao.svg?branch=master)](https://travis-ci.org/dragonfire535/xiao)
-
-> This bot is available for invite.
+[![Discord Server](https://discordapp.com/api/guilds/585164156710158337/embed.png)](https://discord.gg/mCjCkB8)
+> This bot is available for invite.b
 
 Runa is a discord bot coded in javascript   with [discord.js](https://discord.js.org/#/) using the
 [discord-akairo](https://discord-akairo.github.io/#/) wrapper. Runa's job just like in the series is to oversee and moderation!
@@ -23,4 +23,15 @@ Runa is a discord bot coded in javascript   with [discord.js](https://discord.js
 
 To start the bot run `pm2 start bot.js`
 
+
+## Commands
+
+
+### Bot
+*   **help:** sends a list of all commands
+
+### Moderation
+*   **warn:** warns a user if user has three warnings the user get's kicked. (optional reason)
+*   **ban:** bans a user (optional reason)
+*   **clear:** clears user defined amount of messages (1-100)
 
