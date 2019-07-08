@@ -4,7 +4,7 @@
   "description": "A discord moderation bot",
   "main": "bot.js",
   "scripts": {
-    "test": "scripts/test"
+    "test": "test --passWithNoTests"
   },
   "repository": "https://github.com/TitusEntertainment/Yamete-The-Moderation-Bot.git",
   "author": "Titus",
