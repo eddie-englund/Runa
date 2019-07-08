@@ -16,7 +16,7 @@ class banCommand extends Command {
             category: 'moderation',
             description: {
                 content: 'Bans a user',
-                usage: ['!ban <@user> <reason>']
+                usage: ['<@user> <reason>']
             },
             args: [{
                     id: 'member',
@@ -44,8 +44,8 @@ class banCommand extends Command {
             .addField('**User Discriminator**:', args.member.user.discriminator, true)
             .addField('**User CreatedAt**', args.member.user.createdAt, true)
             .addField('**Banned by**:', message.author.username)
-            .addField('**Banned by (id)', message.author.id, true)
-            .addField('**Reason**', args.reason, true)
+            .addField('**Banned by (id)**:', message.author.id, true)
+            .addField('**Reason**:', args.reason, true)
             .setTimestamp(today)
             .setFooter(`Warned by ${message.author.username}, id: ${message.author.id}`);
 
@@ -75,7 +75,7 @@ class banCommand extends Command {
                 return res.deleteOne({
                     userID: args.member.user.id,
                     guildID: message.author.id
-                }).then(res.save()).then(banEmbedFunction()).catch(e => new Error('Failed deleted user at line 40 ban.js', e));
+                }).then(res.save()).then(banEmbedFunction(), args.member.ban()).catch(e => new Error('Failed deleted user at line 40 ban.js', e));
             }
         });
 

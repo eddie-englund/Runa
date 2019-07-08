@@ -14,7 +14,7 @@ class readyEvent extends Listener {
     }
 
     async exec() {
-        await connect('mongodb://localhost:27017/Yamete', {
+        await connect('mongodb://localhost:27017/Runa', {
             useNewUrlParser: true
         });
         console.log('Runa bot is ready');

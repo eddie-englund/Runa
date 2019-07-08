@@ -12,7 +12,7 @@ class helpCommand extends Command {
             clientPermissions: ['SEND_MESSAGES'],
             category: 'bot',
             args: [{
-                id: 'CommandName',
+                id: 'command',
                 type: 'commandAlias',
                 prompt: {
                     start: 'Which command do you need help with?',
@@ -22,7 +22,7 @@ class helpCommand extends Command {
             }],
             description: {
                 content: 'Displays a list of commands or information about a command.',
-                usage: '[y/help <optional command name>]',
+                usage: '[<optional command name>]',
             }
         });
     }
@@ -43,6 +43,7 @@ class helpCommand extends Command {
 
         const embed = this.client.util.embed()
             .setColor(main)
+            .setAuthor('Commands:', message.author.displayAvatarURL)
             .setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
             .addField('Description', description.content);
 
@@ -67,7 +68,7 @@ class helpCommand extends Command {
         const embed = this.client.util.embed()
             .setColor(main)
             .addField('Commands:', [
-                'To view details for a command, do `y/help <command>`.'
+                `To view the details of a command, do ${prefix}help <command>.`
             ]);
 
         for (const category of this.handler.categories.values()) {
@@ -78,7 +79,7 @@ class helpCommand extends Command {
 
             if (title) embed.addField(title, `\`${category.map(cmd => cmd.aliases[0]).join('` `')}\``);
         }
-        return message.reply(embed);
+        return message.channel.send(embed);
     }
 }
 

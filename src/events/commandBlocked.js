@@ -12,6 +12,9 @@ class lackOfPerms extends Listener {
 
     exec(message, command, reason) {
         console.log(`${message.author.username} was blocked from using ${command.id} because of ${reason}!`);
-        return message.reply('Opps! Looks like something went wrong!');
+        if (message.type === 'dm') return;
+        return message.reply(`Opps! Looks like something went wrong! error message: ${reason}`).then(msg => msg.delete(5000));
     }
 }
+
+module.exports = lackOfPerms;
