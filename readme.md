@@ -2,13 +2,13 @@
 
 # Runa
 
-[![Build Status](https://travis-ci.org/dragonfire535/xiao.svg?branch=master)](https://travis-ci.org/dragonfire535/xiao)
-[![Discord Server](https://discordapp.com/api/guilds/585164156710158337/embed.png)](https://discord.gg/mCjCkB8)
+[![Build Status](https://www.travis-ci.org/TitusEntertainment/Runa.svg?branch=master)](https://www.travis-ci.org/TitusEntertainment/Runa)
+[![Discord Server](https://discordapp.com/api/guilds/585164156710158337/embed.png)](https://discord.gg/jQ9cN55)
 
-> This bot is available for invite.
+> This bot is available for invite via the link above.
 
 Runa is a discord bot coded in javascript with [discord.js](https://discord.js.org/#/) using the
-[discord-akairo](https://discord-akairo.github.io/#/) wrapper. Runa's job just like in the series is to oversee and moderation!
+[discord-akairo](https://discord-akairo.github.io/#/) wrapper. Runa's job, just like in the series is to oversee and moderate!
 
 ## Installing
 
