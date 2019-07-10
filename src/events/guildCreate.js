@@ -1,24 +1,23 @@
-const {
-    Listener
-} = require('discord-akairo');
-
-const {
-    main
-} = require('../../colors.json');
+const { Listener } = require("discord-akairo");
 
 class guildCreate extends Listener {
-    constructor() {
-        super('guildCreate', {
-            emitter: 'client',
-            eventName: 'guildCreate'
-        });
-    }
+  constructor() {
+    super("guildCreate", {
+      emitter: "client",
+      eventName: "guildCreate"
+    });
+  }
 
-    exec(guild) {
-        const home = guild.channels.filter(c => c.type === 'text').find(x => x.name === 'general');
-        if (!home) return console.log('No general chat in this guild');
-        home.send('Hi! I\'m runa and and I am a moderation bot! To read more about me go to my website: or write !help');
-    }
+  exec(guild) {
+    const home = guild.channels
+      .filter(c => c.type === "text")
+      .find(x => x.name === "general");
+    if (!home)
+      return console.log(`No general chat found in guild ${guild.name}`);
+    home.send(
+      "Hi! I'm Runa and and I am a moderation bot! To read more about me go to my website: or write !help"
+    );
+  }
 }
 
 module.exports = guildCreate;
