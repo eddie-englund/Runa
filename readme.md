@@ -5,14 +5,14 @@
 [![Build Status](https://www.travis-ci.org/TitusEntertainment/Runa.svg?branch=master)](https://www.travis-ci.org/TitusEntertainment/Runa)
 [![Discord Server](https://discordapp.com/api/guilds/585164156710158337/embed.png)](https://discord.gg/jQ9cN55)
 
-> This bot is available for invite via the link above.
+> This bot is available for invite via the embed above.
 
 Runa is a discord bot coded in javascript with [discord.js](https://discord.js.org/#/) using the
 [discord-akairo](https://discord-akairo.github.io/#/) wrapper. Runa's job, just like in the series is to oversee and moderate!
 
 ## Installing
 
-1. Make sure you have installed [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [yarn](https://yarnpkg.com/).
+1. Make sure you have installed [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [yarn](https://yarnpkg.com/) **IN THAT ORDER**.
 2. Clone this repository with `git clone https://github.com/https://github.com/TitusEntertainment/Runa`.
 3. Run `cd Runa` to move into the folder that you just created.
 4. Create a file named `.env` and fill it out as shown in `.env.example`.
