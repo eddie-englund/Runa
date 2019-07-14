@@ -19,9 +19,5 @@ const client = new AkairoClient(
     disableEveryone: true
   }
 );
-console.log('b4');
-client.on('debug', info => {
-  console.log('got here');
-  console.log(info);
-});
-client.login(process.env.TOKEN).then(x => console.log(x, 'owo'));
+
+client.login(process.env.TOKEN);
