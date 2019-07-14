@@ -1,6 +1,6 @@
 const { Listener } = require("discord-akairo");
 
-class guildCreate extends Listener {
+class GuildCreate extends Listener {
   constructor() {
     super("guildCreate", {
       emitter: "client",
@@ -20,4 +20,4 @@ class guildCreate extends Listener {
   }
 }
 
-module.exports = guildCreate;
+module.exports = GuildCreate;

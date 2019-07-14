@@ -1,7 +1,7 @@
 const { Listener } = require("discord-akairo");
 const { connect } = require("mongoose");
 
-class readyEvent extends Listener {
+class ReadyEvent extends Listener {
   constructor() {
     super("ready", {
       emitter: "client",
@@ -21,4 +21,4 @@ class readyEvent extends Listener {
   }
 }
 
-module.exports = readyEvent;
+module.exports = ReadyEvent;

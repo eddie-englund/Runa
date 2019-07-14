@@ -1,6 +1,6 @@
 const { Listener } = require("discord-akairo");
 
-class lackOfPerms extends Listener {
+class LackOfPerms extends Listener {
   constructor() {
     super("Missing perms", {
       emitter: "commandHandler",
@@ -23,4 +23,4 @@ class lackOfPerms extends Listener {
   }
 }
 
-module.exports = lackOfPerms;
+module.exports = LackOfPerms;
