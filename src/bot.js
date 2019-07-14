@@ -4,7 +4,7 @@ const { join } = require('path');
 config();
 const client = new AkairoClient(
   {
-    ownerID: process.env.ownerID,
+    ownerID: 188349686489415680,
     prefix: '!',
     emitters: {
       process
@@ -19,5 +19,9 @@ const client = new AkairoClient(
     disableEveryone: true
   }
 );
-
-client.login(process.env.TOKEN);
+console.log('b4');
+client.on('debug', info => {
+  console.log('got here');
+  console.log(info);
+});
+client.login(process.env.TOKEN).then(x => console.log(x, 'owo'));
