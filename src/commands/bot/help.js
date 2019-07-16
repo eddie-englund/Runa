@@ -43,8 +43,9 @@ class HelpCommand extends Command {
     const embed = this.client.util
       .embed()
       .setColor(main)
-      .setAuthor('Commands:', message.author.displayAvatarURL)
+      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
       .setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
+      .setThumbnail(this.client.user.displayAvatarURL)
       .addField('Description', description.content);
 
     for (const field of description.fields)
@@ -73,7 +74,9 @@ class HelpCommand extends Command {
 
     const embed = this.client.util
       .embed()
+      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
       .setColor(main)
+      .setThumbnail(this.client.user.displayAvatarURL)
       .addField('Commands:', [
         `To view the details of a command, do ${prefix}help <command>.`
       ]);

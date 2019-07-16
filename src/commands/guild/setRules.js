@@ -13,7 +13,12 @@ class newRulesCommand extends Command {
           id: 'rules',
           match: 'content'
         }
-      ]
+      ],
+      category: 'guild',
+      description: {
+        content: 'Saves guild rules',
+        usage: ['<rules>']
+      }
     });
   }
   exec(message, args) {

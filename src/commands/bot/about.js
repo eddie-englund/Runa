@@ -6,7 +6,11 @@ class AboutCommand extends Command {
     super('about', {
       aliases: ['about', 'bot', 'runa'],
       clientPermissions: ['SEND_MESSAGES'],
-      userPermissions: ['SEND_MESSAGES']
+      userPermissions: ['SEND_MESSAGES'],
+      category: 'bot',
+      description: {
+        content: 'About me, Runa.'
+      }
     });
   }
 

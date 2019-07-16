@@ -7,7 +7,11 @@ class RulesCommand extends Command {
     super('rules', {
       aliases: ['rules', 'readme', 'r'],
       userPermissions: ['SEND_MESSAGES'],
-      clientPermissions: ['SEND_MESSAGES']
+      clientPermissions: ['SEND_MESSAGES'],
+      category: 'guild',
+      description: {
+        content: 'Shows guild rules'
+      }
     });
   }
 
