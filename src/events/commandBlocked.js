@@ -1,10 +1,10 @@
-const { Listener } = require("discord-akairo");
+const { Listener } = require('discord-akairo');
 
-class LackOfPerms extends Listener {
+class CommandBlocked extends Listener {
   constructor() {
-    super("Missing perms", {
-      emitter: "commandHandler",
-      eventName: "commandBlocked"
+    super('Command Blocked', {
+      emitter: 'commandHandler',
+      eventName: 'commandBlocked'
     });
   }
 
@@ -14,7 +14,7 @@ class LackOfPerms extends Listener {
         command.id
       } because of ${reason}!`
     );
-    if (message.type === "dm") return;
+    if (message.type === 'dm') return;
     return message
       .reply(
         `You've been blocked from using this command. error message: ${reason}`
@@ -23,4 +23,4 @@ class LackOfPerms extends Listener {
   }
 }
 
-module.exports = LackOfPerms;
+module.exports = CommandBlocked;

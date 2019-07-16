@@ -13,6 +13,11 @@ class TempMuteCommand extends Command {
         'MANAGE_ROLES',
         'MANAGE_CHANNELS'
       ],
+      category: 'moderation',
+      description: {
+        content: 'Mutes a user for a defined amount of time',
+        usage: ['<@user> <amount of time> <reason>']
+      },
       args: [
         {
           id: 'member',
