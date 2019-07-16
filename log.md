@@ -51,3 +51,19 @@ Added:
 - message event
 - kick command
 - removed log command
+
+### 22:04 16/072019
+
+Added:
+
+- set rules command
+- rules command
+
+Fixed:
+
+- bug causing the bot to be unable to boot
+- loadash security issue (fixed by updating to a newer version)
+
+Notes:
+
+- I seem to have missed to log a few things. I've added a few event listeners.

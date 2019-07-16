@@ -13,13 +13,6 @@ class RulesCommand extends Command {
 
   exec(message) {
     const today = new Date();
-    const embed = this.client.util
-      .embed()
-      .setColor(main)
-      .setAuthor(message.author.displayname, message.author.displayAvatarURL)
-      .setTitle('Guild rules')
-      .addField('Rules: ', res.guildRules)
-      .setTimestamp(today);
 
     Guild.findOne(
       {
@@ -34,6 +27,13 @@ class RulesCommand extends Command {
           !res.guildRules
         )
           return message.reply('This guild has not set any rules.');
+        const embed = this.client.util
+          .embed()
+          .setColor(main)
+          .setAuthor(message.author.username, message.author.displayAvatarURL)
+          .setTitle('Guild rules')
+          .setDescription(res.guildRules)
+          .setTimestamp(today);
         return message.channel.send(embed);
       }
     );

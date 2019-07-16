@@ -36,3 +36,8 @@ To start the bot run `pm2 start bot.js`
 - **ban:** bans a user (optional reason)
 - **kick** kicks specified user (optional reason)
 - **clear:** clears user defined amount of messages (1-100)
+
+### Guild specific
+
+- **setRules:** lets guild owner or admin set guild rules (max char length is 6000)
+- **rules:** lets guild member see the set rules.
