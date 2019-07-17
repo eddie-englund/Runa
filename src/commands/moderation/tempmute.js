@@ -1,6 +1,8 @@
 const { Command } = require('discord-akairo');
 const ms = require('ms');
 const { main } = require('../../../colors.json');
+const msg = require('../../util/msg');
+const Log = require('../../util/log');
 
 class TempMuteCommand extends Command {
   constructor() {
@@ -93,31 +95,13 @@ class TempMuteCommand extends Command {
       .setFooter(
         `Muted by ${message.author.username}, id: ${message.author.id}`
       );
-
-    function msg() {
-      message.channel.send(channelEmbed);
-      const modLogs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'modlogs');
-      const logs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'logs');
-
-      if (modLogs) {
-        return modLogs.send(embed);
-      } else if (logs) {
-        return logs.send(embed);
-      } else {
-        return;
-      }
-    }
-
+    const unmuted = `<@${tomute.id}> has been unmuted!`;
     await tomute.addRole(muterole.id);
-    msg();
+    msg(message, embed, channelEmbed);
 
     setTimeout(function() {
       tomute.removeRole(muterole.id);
-      message.channel.send(`<@${tomute.id}> has been unmuted!`);
+      Log(message, unmuted);
     }, ms(args.time));
   }
 }

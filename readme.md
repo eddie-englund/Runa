@@ -36,6 +36,7 @@ To start the bot run `pm2 start bot.js`
 - **ban:** bans a user (optional reason)
 - **kick** kicks specified user (optional reason)
 - **clear:** clears user defined amount of messages (1-100)
+- **tempmute:** mutes defined user for a defined amount of time. ([ms times](https://www.npmjs.com/package/ms)). For an example 10min
 
 ### Guild specific
 

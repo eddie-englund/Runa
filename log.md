@@ -58,6 +58,11 @@ Added:
 
 - set rules command
 - rules command
+- Temp mute command
+- Perms event
+- More events
+- unban command
+- Util
 
 Fixed:
 

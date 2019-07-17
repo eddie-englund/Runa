@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const { main } = require('../../../colors.json');
+const msg = require('../../util/msg');
 
 class kickCommand extends Command {
   constructor() {
@@ -43,30 +44,9 @@ class kickCommand extends Command {
       .addField('Kicked by id:', message.author.id)
       .setTimestamp(today);
 
-    function msg() {
-      const warnChannel = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'warnlogs');
-      const modLogs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'modlogs');
-      const logs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'logs');
-
-      if (warnChannel) {
-        return warnChannel.send(embed);
-      } else if (modLogs) {
-        return modLogs.send(embed);
-      } else if (logs) {
-        return logs.send(embed);
-      } else {
-        return;
-      }
-    }
     return args.member.user
       .kick()
-      .then(msg())
+      .then(msg(message, embed))
       .catch(e => new Error('Failed to kick user', e));
   }
 }

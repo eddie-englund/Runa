@@ -4,14 +4,15 @@ const { join } = require('path');
 config();
 const client = new AkairoClient(
   {
-    ownerID: 188349686489415680,
+    ownerID: process.env.ownerID,
     prefix: '!',
     emitters: {
       process
     },
     blockBots: true,
     defaultCooldown: 2500,
-    allowMention: false,
+    allowMention: true,
+    handleEdits: true,
     commandDirectory: join(__dirname, 'commands'),
     listenerDirectory: join(__dirname, 'events')
   },

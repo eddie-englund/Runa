@@ -1,11 +1,12 @@
 const { Command } = require('discord-akairo');
 const { main } = require('../../../colors.json');
 const Guild = require('../../models/guild.js');
+const msg = require('../../util/msg');
 
 class newRulesCommand extends Command {
   constructor() {
     super('guildRules', {
-      aliases: ['newrules', 'guildrules', 'serverrules', 'srules'],
+      aliases: ['setrules', 'guildrules', 'serverrules', 'srules'],
       clientPermissions: ['SEND_MESSAGES'],
       userPermissions: ['ADMINISTRATOR'],
       args: [
@@ -42,24 +43,6 @@ class newRulesCommand extends Command {
       .addField('**UserID**: ', message.author.id, true)
       .setTimestamp(today);
 
-    function msg() {
-      message.channel.send(embed);
-      const modLogs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'modlogs');
-      const logs = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'logs');
-
-      if (modLogs) {
-        return modLogs.send(embed);
-      } else if (logs) {
-        return logs.send(embed);
-      } else {
-        return;
-      }
-    }
-
     Guild.findOne(
       {
         guildID: message.guild.id
@@ -78,7 +61,7 @@ class newRulesCommand extends Command {
           });
           return newGuild
             .save()
-            .then(msg())
+            .then(msg(message, embed))
             .catch(e => new Error('Failed to save newGuild in rules.js', e));
         } else {
           res.guildRules = args.rules;
@@ -86,7 +69,7 @@ class newRulesCommand extends Command {
           res.guildRulesUserID = message.author.id;
           return res
             .save()
-            .then(msg())
+            .then(msg(message, embed))
             .catch(e => new Error('Failed to save new res', e));
         }
       }
