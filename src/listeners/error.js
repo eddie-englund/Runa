@@ -8,7 +8,10 @@ class ErrorEventListener extends Listener {
     });
   }
 
-  exec(e) {
-    console.log('ERROR V', e);
+  exec(e, message) {
+    message.reply('Waow');
+    console.log(e);
   }
 }
+
+module.exports = ErrorEventListener;

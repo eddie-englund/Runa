@@ -34,9 +34,10 @@ class RulesCommand extends Command {
         const embed = this.client.util
           .embed()
           .setColor(main)
-          .setAuthor(message.author.username, message.author.displayAvatarURL)
+          .setAuthor(message.author.username, message.author.displayAvatarURL())
           .setTitle('Guild rules')
           .setDescription(res.guildRules)
+          .setThumbnail(message.guild.iconURL())
           .setTimestamp(today);
         return message.channel.send(embed);
       }

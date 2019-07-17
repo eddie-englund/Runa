@@ -28,7 +28,7 @@ class HelpCommand extends Command {
   exec(message, { command }) {
     if (!command) return this.execCommandList(message);
     // eslint-disable-next-line prefer-const
-    const prefix = this.commandHandler.prefix(message);
+    const prefix = this.handler.prefix;
     // eslint-disable-next-line no-undef
     const description = Object.assign(
       {
@@ -43,9 +43,9 @@ class HelpCommand extends Command {
     const embed = this.client.util
       .embed()
       .setColor(main)
-      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
+      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
       .setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
-      .setThumbnail(this.client.user.displayAvatarURL)
+      .setThumbnail(this.client.user.displayAvatarURL())
       .addField('Description', description.content);
 
     for (const field of description.fields)
@@ -74,9 +74,9 @@ class HelpCommand extends Command {
 
     const embed = this.client.util
       .embed()
-      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
+      .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
       .setColor(main)
-      .setThumbnail(this.client.user.displayAvatarURL)
+      .setThumbnail(this.client.user.displayAvatarURL())
       .addField('Commands:', [
         `To view the details of a command, do ${prefix}help <command>.`
       ]);

@@ -19,8 +19,8 @@ class AboutCommand extends Command {
     const embed = this.client.util
       .embed()
       .setColor(main)
-      .setAuthor(message.author.username, message.author.displayAvatarURL)
-      .setThumbnail(this.client.user.displayAvatarURL)
+      .setAuthor(message.author.username, message.author.displayAvatarURL())
+      .setThumbnail(this.client.user.displayAvatarURL())
       .setDescription([
         "Hi! My name is Runa and I'm a moderation bot!",
         '',

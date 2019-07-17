@@ -35,7 +35,7 @@ class newRulesCommand extends Command {
     const embed = this.client.util
       .embed()
       .setColor(main)
-      .setAuthor(message.author.username, message.author.displayAvatarURL)
+      .setAuthor(message.author.username, message.author.displayAvatarURL())
       .setDescription(
         'A admin has set new rules! Check them out with the rules command'
       )

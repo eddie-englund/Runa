@@ -26,7 +26,7 @@ class UnbanCommand extends Command {
     });
   }
 
-  exec(message, args, clientPermissions) {
+  exec(message, args) {
     if (!args.user || args.user.length < 1)
       return message.reply(
         'You need to include a userResolvable, such as a userID you can get this from the logs'
