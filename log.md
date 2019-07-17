@@ -72,3 +72,13 @@ Fixed:
 Notes:
 
 - I seem to have missed to log a few things. I've added a few event listeners.
+
+### 13:15 17/07/2019
+
+**MAJOR OVERHAUL TO AKAIRO MASTER**
+
+Added:
+
+- MissingPerms event
+
+Changed a lot of code to work with discord.js@master and discord-akairo@master (there might still be bugs)

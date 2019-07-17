@@ -1,4 +1,4 @@
-const { Command } = require('discord-akairo');
+const { Command, ClientUtil } = require('discord-akairo');
 const { main } = require('../../../colors.json');
 
 class HelpCommand extends Command {
@@ -28,7 +28,7 @@ class HelpCommand extends Command {
   exec(message, { command }) {
     if (!command) return this.execCommandList(message);
     // eslint-disable-next-line prefer-const
-    const prefix = this.handler.prefix(message);
+    const prefix = this.commandHandler.prefix(message);
     // eslint-disable-next-line no-undef
     const description = Object.assign(
       {
@@ -70,7 +70,7 @@ class HelpCommand extends Command {
   }
 
   async execCommandList(message) {
-    const prefix = this.handler.prefix(message);
+    const prefix = this.handler.prefix;
 
     const embed = this.client.util
       .embed()
@@ -81,7 +81,7 @@ class HelpCommand extends Command {
         `To view the details of a command, do ${prefix}help <command>.`
       ]);
 
-    for (const category of this.handler.categories.values()) {
+    for (const category of this.client.commandHandler.categories.values()) {
       const title = {
         bot: '\u2000Bot',
         guild: '\u2000Guild',

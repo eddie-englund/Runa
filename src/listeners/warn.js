@@ -3,7 +3,7 @@ const { Listener } = require('discord-akairo');
 class WarnEventListener extends Listener {
   constructor() {
     super('warn listener', {
-      eventName: 'warn',
+      event: 'warn',
       emitter: 'client'
     });
   }

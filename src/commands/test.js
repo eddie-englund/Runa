@@ -4,7 +4,6 @@ const msg = require('../util/log.js');
 class TestCommand extends Command {
   constructor() {
     super('test', {
-      ownerOnly: true,
       aliases: ['test']
     });
   }

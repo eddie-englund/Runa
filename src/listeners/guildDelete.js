@@ -1,14 +1,14 @@
-const { Listener } = require("discord-akairo");
+const { Listener } = require('discord-akairo');
 
-const ms = require("ms");
+const ms = require('ms');
 
-const User = require("../models/user");
+const User = require('../models/user');
 
 class GuildDelete extends Listener {
   constructor() {
-    super("guildDelete", {
-      emitter: "client",
-      eventName: "guildDelete"
+    super('guildDelete', {
+      emitter: 'client',
+      event: 'guildDelete'
     });
   }
 
@@ -30,7 +30,7 @@ class GuildDelete extends Listener {
             )
         );
       }
-    }, ms("2 days"));
+    }, ms('2 days'));
     return console.log(`Left guild: ${guild.name}, guildID: ${guild.id}`);
   }
 }
