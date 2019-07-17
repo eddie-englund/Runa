@@ -42,13 +42,15 @@ class UnbanCommand extends Command {
       .setThumbnail(this.client.user.displayAvatarURL)
       .setTimestamp(today);
 
-    message.guild.unban(args.user).catch(e => {
-      if (e)
-        return (
-          console.log(e) &&
-          message.reply('Hmm, seems like something went wrong!')
+    message.guild.members.unban(args.user, args.reason).catch(e => {
+      if (e) {
+        console.log(e);
+        return message.reply(
+          `Something went wrong! Error message: ${e.message}`
         );
-      msg(message, embed);
+      } else {
+        msg(message, embed);
+      }
     });
   }
 }
