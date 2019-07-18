@@ -12,7 +12,7 @@ Runa is a discord bot written in javascript with [discord.js](https://discord.js
 
 ## Installing
 
-1. Make sure you have installed [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [yarn](https://yarnpkg.com/) **IN THAT ORDER**.
+1. Make sure you have installed [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [yarn](https://yarnpkg.com/).
 2. Clone this repository with `git clone https://github.com/https://github.com/TitusEntertainment/Runa`.
 3. Run `cd Runa/src` to move into the folder that you just created.
 4. Create a file named `.env` and fill it out as shown in `.env.md`.
@@ -34,11 +34,14 @@ To start the bot run `pm2 start bot.js`
 
 - **warn:** warns a user if user has three warnings the user get's kicked. (optional reason)
 - **ban:** bans a user (optional reason)
+- **uban:** unbans a user (optional reason). **NEEDS USERID**
 - **kick** kicks specified user (optional reason)
 - **clear:** clears user defined amount of messages (1-100)
-- **tempmute:** mutes defined user for a defined amount of time. ([ms times](https://www.npmjs.com/package/ms)). For an example 10min
+- **tempmute:** mutes defined user for a defined amount of time. For an example 10min.
+- **tempban:** temporarily bans a user for a defined amount of time. If no argument given it's 1 day by default.
 
 ### Guild specific
 
 - **setRules:** lets guild owner or admin set guild rules (max char length is 6000)
 - **rules:** lets guild member see the set rules.
+- **lookup:** Looks up the mentioned user.
