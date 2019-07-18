@@ -6,7 +6,7 @@ const msg = require('../../util/msg');
 class newRulesCommand extends Command {
   constructor() {
     super('guildRules', {
-      aliases: ['setrules', 'guildrules', 'serverrules', 'srules'],
+      aliases: ['setrules', 'newrules', 'guildrules', 'serverrules', 'srules'],
       clientPermissions: ['SEND_MESSAGES'],
       userPermissions: ['ADMINISTRATOR'],
       args: [

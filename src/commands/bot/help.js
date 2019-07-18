@@ -1,4 +1,4 @@
-const { Command, ClientUtil } = require('discord-akairo');
+const { Command } = require('discord-akairo');
 const { main } = require('../../../colors.json');
 
 class HelpCommand extends Command {
