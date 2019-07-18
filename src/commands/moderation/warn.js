@@ -107,7 +107,7 @@ class warnCommand extends Command {
                     return newUser
                         .save()
                         .catch(e => new Error('newUser failed to save', e))
-                        .then(msg(message, embed, kickEmbed));
+                        .then(msg(message, embed));
                 } else {
                     res.warnings += 1;
                     res.warners.push({
@@ -136,7 +136,7 @@ class warnCommand extends Command {
                                 )
                         )
                         .then(msg(message, embed, kickEmbed))
-                        .catch(e => new Error('Faile to kick user', e));
+                        .catch(e => new Error('Failed to kick user', e));
                 }
             }
         );

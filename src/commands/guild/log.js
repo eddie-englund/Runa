@@ -33,17 +33,13 @@ class SetLogCommand extends Command {
         const guildEmbed = this.client.util
             .embed()
             .setColor(main)
-            .setTitle('A new log channel has been set!')
-            .setAuthor(
-                message.author.username,
-                message.author.displayAvatarURL()
-            )
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription(
                 `A new log channel has been set! The new channel is ${
                     args.cName
                 }`
             )
-            .setThumbnail(Date());
+            .setTimestamp(Date());
 
         Guild.findOne(
             {
@@ -73,7 +69,7 @@ class SetLogCommand extends Command {
                 } else {
                     res.guildLog = args.cName;
                     res.save()
-                        .then(message.reply(guildEmbed))
+                        .then(message.util.send(guildEmbed))
                         // eslint-disable-next-line no-console
                         .catch(e => console.log(e));
                 }
