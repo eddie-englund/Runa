@@ -34,7 +34,8 @@ class TempMuteCommand extends Command {
                     match: 'rest',
                     default: 'No reason given'
                 }
-            ]
+            ],
+            channel: 'guild'
         });
     }
     async exec(message, args) {

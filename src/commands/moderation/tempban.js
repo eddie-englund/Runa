@@ -28,7 +28,8 @@ class TemporaryBanCommand extends Command {
                     match: 'rest',
                     default: 'No reason given'
                 }
-            ]
+            ],
+            channel: 'guild'
         });
     }
     exec(message, args) {

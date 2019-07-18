@@ -26,7 +26,8 @@ class banCommand extends Command {
                     match: 'rest',
                     default: 'No reason defined'
                 }
-            ]
+            ],
+            channel: 'guild'
         });
     }
 
