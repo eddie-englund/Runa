@@ -1,3 +1,4 @@
+/* eslint-disable no-sparse-arrays */
 const { Command } = require('discord-akairo');
 const { main } = require('../../../colors.json');
 
@@ -26,10 +27,10 @@ class AboutCommand extends Command {
             )
             .setThumbnail(this.client.user.displayAvatarURL())
             .setDescription([
-                'Hi! My name is Runa and I\'m a moderation bot!',
+                '**Hi! My name is Runa and I\'m a moderation bot**!',
                 '',
                 'You can read more about me here: https://github.com/TitusEntertainment/Runa',
-                '',
+                '',,
                 'By default the prefix that I react to is: **!**',
                 '',
                 'To get help with commands write **@runa help** or **!help**.',

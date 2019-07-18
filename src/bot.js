@@ -1,8 +1,7 @@
 const {
     AkairoClient,
     CommandHandler,
-    ListenerHandler,
-    InhibitorHandler
+    ListenerHandler
 } = require('discord-akairo');
 const { config } = require('dotenv');
 const { join } = require('path');
@@ -30,12 +29,7 @@ class RunaClient extends AkairoClient {
         this.listenerHandler = new ListenerHandler(this, {
             directory: join(__dirname, 'listeners')
         });
-        this.inhibitorHandler = new InhibitorHandler(this, {
-            directory: join(__dirname, 'inhibitors')
-        });
-        this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
         this.commandHandler.useListenerHandler(this.ListenerHandler);
-        this.useInhibitorHandler.loadAll();
         this.listenerHandler.loadAll();
         this.commandHandler.loadAll();
     }
