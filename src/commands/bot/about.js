@@ -10,7 +10,7 @@ class AboutCommand extends Command {
             userPermissions: ['SEND_MESSAGES'],
             category: 'bot',
             description: {
-                content: 'About me, Runa.'
+                content: 'Sends a about me, Runa.'
             },
             channel: 'guild'
         });
@@ -31,6 +31,7 @@ class AboutCommand extends Command {
                 '',
                 'You can read more about me here: https://github.com/TitusEntertainment/Runa',
                 '',,
+
                 'By default the prefix that I react to is: **!**',
                 '',
                 'To get help with commands write **@runa help** or **!help**.',

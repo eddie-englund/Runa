@@ -13,7 +13,13 @@ class SetLogCommand extends Command {
                     id: 'cName',
                     type: 'string'
                 }
-            ]
+            ],
+            category: 'guild',
+            description: {
+                content: 'Sets a new log channel',
+                usage: ['<channel name>']
+            },
+            channel: 'guild'
         });
     }
 

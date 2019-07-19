@@ -82,3 +82,9 @@ Added:
 - MissingPerms event
 
 Changed a lot of code to work with discord.js@master and discord-akairo@master (there might still be bugs)
+
+"missed date"
+
+Added:
+
+- log command and updated util

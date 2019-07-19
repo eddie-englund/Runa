@@ -23,7 +23,7 @@ class newRulesCommand extends Command {
             ],
             category: 'guild',
             description: {
-                content: 'Saves guild rules',
+                content: 'Set\'s guild rules',
                 usage: ['<rules>']
             },
             channel: 'guild'
