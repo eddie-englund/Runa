@@ -39,6 +39,7 @@ To start the bot run `pm2 start bot.js`
 - **clear:** clears user defined amount of messages (1-100)
 - **tempmute:** mutes defined user for a defined amount of time. For an example 10min.
 - **tempban:** temporarily bans a user for a defined amount of time (If no argument given it's 1 day by default)
+- **pardon:** removes all warnings from the user, aka pardons the user.
 
 ### Guild specific
 
@@ -46,3 +47,4 @@ To start the bot run `pm2 start bot.js`
 - **rules:** lets guild member see the set rules (if there is any).
 - **lookup:** Looks up the mentioned user.
 - **log:** Sets a new log channel (default is modlogs)
+- **bans:** Sends info about how many bans the guild has banned with the bot and the latest user to get banned

@@ -14,6 +14,7 @@ const GuildSchema = new Schema({
     guildRulesUser: String,
     guildRulesUserID: String,
     guildLog: String,
+    guildLogActive: Boolean,
     bans: Number,
     guildBans: [BanSchema],
     date: String

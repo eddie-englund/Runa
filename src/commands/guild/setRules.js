@@ -70,6 +70,7 @@ class newRulesCommand extends Command {
                         guildOwner: message.guild.owner.username,
                         guildOwnerID: message.guild.ownerid,
                         guildRules: args.rules,
+                        guildLogActive: true,
                         guildRulesUser: message.author.username,
                         guildRulesUserID: message.author.id,
                         date: today

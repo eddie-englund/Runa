@@ -88,3 +88,5 @@ Changed a lot of code to work with discord.js@master and discord-akairo@master (
 Added:
 
 - log command and updated util
+- pardon commad
+- bans command
