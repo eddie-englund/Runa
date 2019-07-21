@@ -1,4 +1,5 @@
 const { Listener } = require('discord-akairo');
+const logger = require('../util/winston');
 
 class WarnEventListener extends Listener {
     constructor() {
@@ -7,9 +8,8 @@ class WarnEventListener extends Listener {
             emitter: 'client'
         });
     }
-    exec(e) {
-        // eslint-disable-next-line no-console
-        console.log('Warning: ', e);
+    exec(info) {
+        logger.warn({ event: 'warn' }, info);
     }
 }
 

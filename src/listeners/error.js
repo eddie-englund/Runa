@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-
+const logger = require('../util/winston');
 class ErrorEventListener extends Listener {
     constructor() {
         super('Error', {
@@ -8,10 +8,8 @@ class ErrorEventListener extends Listener {
         });
     }
 
-    exec(e, message) {
-        message.reply(`Error: ${e.message}`);
-        // eslint-disable-next-line no-console
-        console.log(e);
+    exec(error) {
+        logger.error({ event: 'error' }, error.message, error);
     }
 }
 

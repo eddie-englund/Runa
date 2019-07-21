@@ -6,9 +6,14 @@ function log(message, embed) {
             guildID: message.guild.id
         },
         (err, res) => {
+            let logChannel = res.guildLog;
+            if (!res || res.guildLog.length < 1 || !res.guildLog) {
+                logChannel = 'modlogs';
+            }
+
             const modlog = message.guild.channels
                 .filter(c => c.type === 'text')
-                .find(x => x.name === res.guildLog);
+                .find(x => x.name === logChannel);
             // eslint-disable-next-line no-new
             if (err) new Error('Error in log.js line 8', err);
             switch (res.guildRulesActive) {

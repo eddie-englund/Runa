@@ -57,7 +57,7 @@
     "no-multi-spaces": "error",
     "no-new-func": "error",
     "no-new-wrappers": "error",
-    "no-new": "error",
+    "no-new": "off",
     "no-octal-escape": "error",
     "no-return-assign": "error",
     "no-return-await": "error",

@@ -64,6 +64,7 @@ class SetLogCommand extends Command {
                         guildRules: '',
                         guildRulesUser: '',
                         guildRulesUserID: '',
+                        guildLogActive: true,
                         guildLog: args.cName,
                         date: Date()
                     });

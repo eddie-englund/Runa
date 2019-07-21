@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const { Listener } = require('discord-akairo');
 const { connect } = require('mongoose');
+const logger = require('../util/winston');
 
 class ReadyEvent extends Listener {
     constructor() {
@@ -16,12 +17,12 @@ class ReadyEvent extends Listener {
             {
                 useNewUrlParser: true
             },
-            err => console.log('Connected to db', err)
+            err => logger.info('Connected to db. Error: ', err)
         );
 
         this.client.user.setActivity('!help', { type: 'LISTENING' });
 
-        console.log('Runa bot is ready');
+        logger.info('Runa bot has connected');
     }
 }
 
