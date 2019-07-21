@@ -18,6 +18,9 @@ class ReadyEvent extends Listener {
             },
             err => console.log('Connected to db', err)
         );
+
+        this.client.user.setActivity('!help', { type: 'LISTENING' });
+
         console.log('Runa bot is ready');
     }
 }

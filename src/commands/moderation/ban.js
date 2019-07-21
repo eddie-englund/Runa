@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const User = require('../../models/user');
+const Guild = require('../../models/guild');
 const { main } = require('../../../colors.json');
 const msg = require('../../util/msg');
 
@@ -86,6 +87,64 @@ class banCommand extends Command {
                         );
                 }
             }
+        ).then(
+            Guild.findOne(
+                {
+                    guildID: message.guild.id
+                },
+                (res, err) => {
+                    if (err) {
+                        // eslint-disable-next-line no-new
+                        new Error(
+                            'Error at Guild.findOne() at line 96 ban.js',
+                            err
+                        );
+                    }
+
+                    if (!res) {
+                        const newGuild = new Guild({
+                            guildID: message.guild.id,
+                            guildOwner: message.guild.owner.username,
+                            guildOwnerID: message.guild.ownerid,
+                            guildRules: args.rules,
+                            guildRulesUser: message.author.username,
+                            guildRulesUserID: message.author.id,
+                            bans: 1,
+                            guildBans: [
+                                {
+                                    userID: args.member.user.id,
+                                    username: args.member.user.tag,
+                                    date: today
+                                }
+                            ],
+                            date: today
+                        });
+                        newGuild
+                            .save()
+                            .catch(
+                                e =>
+                                    new Error(
+                                        'Failed saving new guild line 121 ban.js',
+                                        e
+                                    )
+                            );
+                    } else {
+                        res.bans += 1;
+                        res.guildBans.push({
+                            userID: args.member.user.id,
+                            username: args.member.user.tag,
+                            date: today
+                        });
+                        res.save().catch(
+                            e =>
+                                new Error(
+                                    'Failed to save res at line 138 ban.js',
+                                    e
+                                )
+                        );
+                    }
+                }
+            )
         );
         return undefined;
     }

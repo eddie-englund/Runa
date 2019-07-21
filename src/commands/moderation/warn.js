@@ -88,7 +88,7 @@ class warnCommand extends Command {
                 if (!res) {
                     const newUser = new User({
                         userID: args.member.user.id,
-                        username: args.member.user.name,
+                        username: args.member.user.username,
                         guildID: message.guild.id,
                         warnings: 1,
                         warners: [
@@ -135,7 +135,7 @@ class warnCommand extends Command {
                                     e
                                 )
                         )
-                        .then(msg(message, embed, kickEmbed))
+                        .then(msg(message, embed))
                         .catch(e => new Error('Failed to kick user', e));
                 }
             }

@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+const BanSchema = new Schema({
+    userID: String,
+    username: String,
+    date: String
+});
+
 const GuildSchema = new Schema({
     guildID: String,
     guildOwner: String,
@@ -8,6 +14,8 @@ const GuildSchema = new Schema({
     guildRulesUser: String,
     guildRulesUserID: String,
     guildLog: String,
+    bans: Number,
+    guildBans: [BanSchema],
     date: String
 });
 

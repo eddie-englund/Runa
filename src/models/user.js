@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const { model, Schema } = require('mongoose');
 
 const WarnerSchema = Schema({
@@ -17,14 +18,10 @@ const UserSchema = Schema({
     username: String,
     guildID: String,
     warnings: Number,
-    warners: [
-        WarnerSchema
-    ],
+    warners: [WarnerSchema],
     warnDate: Array,
     reports: Number,
-    reporters:[
-        ReporterSchema
-    ],
+    reporters: [ReporterSchema],
     reportDate: Array,
     createdAt: String
 });
