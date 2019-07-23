@@ -1,8 +1,4 @@
-const {
-    AkairoClient,
-    CommandHandler,
-    ListenerHandler
-} = require('discord-akairo');
+const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 const { config } = require('dotenv');
 const { join } = require('path');
 config();
@@ -16,6 +12,7 @@ class RunaClient extends AkairoClient {
                 disableEveryone: true
             }
         );
+
         this.commandHandler = new CommandHandler(this, {
             prefix: '!',
             blockBots: true,
@@ -34,6 +31,6 @@ class RunaClient extends AkairoClient {
         this.commandHandler.loadAll();
     }
 }
-
 const client = new RunaClient();
+client.blue = require('./colors.js');
 client.login(process.env.TOKEN);

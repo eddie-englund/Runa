@@ -2,7 +2,6 @@
 const { Listener } = require('discord-akairo');
 const { connect } = require('mongoose');
 const logger = require('../util/winston');
-
 class ReadyEvent extends Listener {
     constructor() {
         super('ready', {
