@@ -1,5 +1,4 @@
 const { Listener } = require('discord-akairo');
-const logger = require('../util/winston');
 class MissingPermissionsEvent extends Listener {
     constructor() {
         super('missing perms', {
@@ -10,7 +9,7 @@ class MissingPermissionsEvent extends Listener {
 
     exec(message, command, type, missing) {
         if (type === 'client') {
-            logger.warn(
+            this.client.logger.warn(
                 `Missing permissions in guild: ${message.guild.name}, guildID: ${message.guild.id}`,
                 missing,
                 command

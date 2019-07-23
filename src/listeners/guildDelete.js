@@ -1,7 +1,5 @@
 const { Listener } = require('discord-akairo');
-
 const ms = require('ms');
-
 const User = require('../models/user');
 
 class GuildDelete extends Listener {
@@ -13,6 +11,7 @@ class GuildDelete extends Listener {
     }
 
     exec(guild) {
+        const today = new Date();
         if (guild.avalible === false) return;
         const Guilds = this.client.guilds;
         // eslint-disable-next-line func-names
@@ -24,9 +23,7 @@ class GuildDelete extends Listener {
                     },
                     err =>
                         new Error(
-                            `Failed to delete all guild members when bot left guild: ${
-                                guild.name
-                            } guildID: ${guild.id}`,
+                            `Failed to delete all guild members when bot left guild: ${guild.name} guildID: ${guild.id}`,
                             err
                         )
                 );
@@ -34,7 +31,10 @@ class GuildDelete extends Listener {
             return undefined;
         }, ms('2 days'));
         // eslint-disable-next-line no-console, consistent-return
-        return console.log(`Left guild: ${guild.name}, guildID: ${guild.id}`);
+        return this.client.logger.info(
+            { event: 'guildDelete' },
+            `Left guild: ${guild.name}, guildID: ${guild.id} at ${today}`
+        );
     }
 }
 

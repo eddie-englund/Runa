@@ -1,6 +1,7 @@
 const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 const { config } = require('dotenv');
 const { join } = require('path');
+
 config();
 class RunaClient extends AkairoClient {
     constructor() {
@@ -32,5 +33,8 @@ class RunaClient extends AkairoClient {
     }
 }
 const client = new RunaClient();
-client.blue = require('./colors.js');
+client.color = require('./util/colors.js');
+client.log = require('./util/log');
+client.msg = require('./util/msg');
+client.logger = require('./util/winston');
 client.login(process.env.TOKEN);
