@@ -1,8 +1,6 @@
 const { Command } = require('discord-akairo');
 const User = require('../../models/user');
 const Guild = require('../../models/guild');
-const { main } = require('../../../colors.json');
-const msg = require('../../util/msg');
 
 class banCommand extends Command {
     constructor() {
@@ -38,26 +36,20 @@ class banCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(
                 `Banned user: ${args.member.user.username}`,
                 args.member.user.displayAvatarURL
             )
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)
-            .addField(
-                '**User Discriminator**:',
-                args.member.user.discriminator,
-                true
-            )
+            .addField('**User Discriminator**:', args.member.user.discriminator, true)
             .addField('**User CreatedAt**', args.member.user.createdAt, true)
             .addField('**Banned by**:', message.author.username)
             .addField('**Banned by (id)**:', message.author.id, true)
             .addField('**Reason**:', args.reason, true)
             .setTimestamp(today)
-            .setFooter(
-                `Banned by ${message.author.username}, id: ${message.author.id}`
-            );
+            .setFooter(`Banned by ${message.author.username}, id: ${message.author.id}`);
 
         await User.findOne(
             {
@@ -68,7 +60,17 @@ class banCommand extends Command {
                 // eslint-disable-next-line no-new
                 if (err) new Error('Failed at User.findOne() in ban.js', err);
                 if (!res) {
-                    return args.member.ban().then(msg(message, embed));
+                    return args.member
+                        .ban()
+                        .then(this.client.msg(message, embed))
+                        .catch(e =>
+                            this.client.logger.error(
+                                { event: 'error' },
+                                'Failed to ban',
+                                `Error message: ${e.message}`,
+                                `Error: ${e}`
+                            )
+                        );
                 } else {
                     message.guild.ban(args.member.member, 2);
                     return res
@@ -77,13 +79,13 @@ class banCommand extends Command {
                             guildID: message.author.id
                         })
                         .then(res.save())
-                        .then(msg(message, embed), args.member.ban())
-                        .catch(
-                            e =>
-                                new Error(
-                                    'Failed deleted user at line 40 ban.js',
-                                    e
-                                )
+                        .then(this.client.msg(message, embed), args.member.ban())
+                        .catch(e =>
+                            this.client.logger.error(
+                                { event: 'error' },
+                                `Error message: ${e.message}`,
+                                `Error: ${e}`
+                            )
                         );
                 }
             }
@@ -94,10 +96,10 @@ class banCommand extends Command {
                 },
                 (res, err) => {
                     if (err) {
-                        // eslint-disable-next-line no-new
-                        new Error(
-                            'Error at Guild.findOne() at line 96 ban.js',
-                            err
+                        this.client.logger.error(
+                            { event: 'error' },
+                            `Error message: ${err.message}`,
+                            `Error ${err}`
                         );
                     }
 
@@ -121,13 +123,7 @@ class banCommand extends Command {
                         });
                         newGuild
                             .save()
-                            .catch(
-                                e =>
-                                    new Error(
-                                        'Failed saving new guild line 121 ban.js',
-                                        e
-                                    )
-                            );
+                            .catch(e => new Error('Failed saving new guild line 121 ban.js', e));
                     } else {
                         res.bans += 1;
                         res.guildBans.push({
@@ -136,11 +132,7 @@ class banCommand extends Command {
                             date: today
                         });
                         res.save().catch(
-                            e =>
-                                new Error(
-                                    'Failed to save res at line 138 ban.js',
-                                    e
-                                )
+                            e => new Error('Failed to save res at line 138 ban.js', e)
                         );
                     }
                 }

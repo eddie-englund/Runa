@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
-const msg = require('../../util/msg');
 const ms = require('ms');
 
 class TemporaryBanCommand extends Command {
@@ -40,11 +38,8 @@ class TemporaryBanCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                message.author.username,
-                message.author.displayAvatarURL()
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(message.author.username, message.author.displayAvatarURL())
             .addField('**Tempbanned user**: ', args.member.user.tag, true)
             .addField('**Tempbanned userID**: ', args.member.user.id, true)
             .addField('**Reason**:', args.reason)
@@ -52,7 +47,7 @@ class TemporaryBanCommand extends Command {
             .addField('**Tempbanned by ID: ', message.author.id, true)
             .setThumbnail(this.client.user.displayAvatarURL())
             .setTimestamp(today);
-        message.guild.ban(args.member.user.id, 2).then(msg(message, embed));
+        message.guild.ban(args.member.user.id, 2).then(this.client.msg(message, embed));
 
         return setTimeout(() => {
             message.guild.unban(args.member.user.id);

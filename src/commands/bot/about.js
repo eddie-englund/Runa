@@ -1,6 +1,5 @@
 /* eslint-disable no-sparse-arrays */
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 
 class AboutCommand extends Command {
     constructor() {
@@ -20,11 +19,8 @@ class AboutCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                message.author.username,
-                message.author.displayAvatarURL()
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(message.author.username, message.author.displayAvatarURL())
             .setThumbnail(this.client.user.displayAvatarURL())
             .setDescription([
                 '**Hi! My name is Runa and I\'m a moderation bot**!',

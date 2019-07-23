@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
 const Guild = require('../../models/guild');
-const { main } = require('../../../colors.json');
 
 class RulesCommand extends Command {
     constructor() {
@@ -31,20 +30,13 @@ class RulesCommand extends Command {
                 if (!res) {
                     return message.reply('This guild has not set any rules.');
                 }
-                if (
-                    res.guildRules.length === 0
-                    || res.guildRules.length < 1
-                    || !res.guildRules
-                ) {
+                if (res.guildRules.length === 0 || res.guildRules.length < 1 || !res.guildRules) {
                     return message.reply('This guild has not set any rules.');
                 }
                 const embed = this.client.util
                     .embed()
-                    .setColor(main)
-                    .setAuthor(
-                        message.author.username,
-                        message.author.displayAvatarURL()
-                    )
+                    .setColor(this.client.color.blue)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL())
                     .setTitle('Guild rules')
                     .setDescription(res.guildRules)
                     .setThumbnail(message.guild.iconURL())

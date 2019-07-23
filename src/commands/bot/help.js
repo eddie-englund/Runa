@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 
 class HelpCommand extends Command {
     constructor() {
@@ -19,8 +18,7 @@ class HelpCommand extends Command {
                 }
             ],
             description: {
-                content:
-                    'Displays a list of commands or information about a command.',
+                content: 'Displays a list of commands or information about a command.',
                 usage: '[<optional command name>]'
             },
             channel: 'guild'
@@ -44,11 +42,8 @@ class HelpCommand extends Command {
 
         const embed = this.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                this.client.user.username,
-                this.client.user.displayAvatarURL()
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
             .setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
             .setThumbnail(this.client.user.displayAvatarURL())
             .addField('Description', description.content);
@@ -67,11 +62,7 @@ class HelpCommand extends Command {
         }
 
         if (command.aliases.length > 1) {
-            embed.addField(
-                'Aliases',
-                `\`${command.aliases.join('` `')}\``,
-                true
-            );
+            embed.addField('Aliases', `\`${command.aliases.join('` `')}\``, true);
         }
 
         return message.channel.send({
@@ -84,11 +75,8 @@ class HelpCommand extends Command {
 
         const embed = this.client.util
             .embed()
-            .setAuthor(
-                this.client.user.username,
-                this.client.user.displayAvatarURL()
-            )
-            .setColor(main)
+            .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
+            .setColor(this.client.color.blue)
             .setThumbnail(this.client.user.displayAvatarURL())
             .addField('Commands:', [
                 `To view the details of a command, do ${prefix}help <command>.`
@@ -102,10 +90,7 @@ class HelpCommand extends Command {
             }[category.id];
 
             if (title) {
-                embed.addField(
-                    title,
-                    `\`${category.map(cmd => cmd.aliases[0]).join('` `')}\``
-                );
+                embed.addField(title, `\`${category.map(cmd => cmd.aliases[0]).join('` `')}\``);
             }
         }
         return message.channel.send(embed);

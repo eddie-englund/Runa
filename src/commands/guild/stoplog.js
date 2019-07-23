@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
 const Guild = require('../../models/guild');
-const { main } = require('../../../colors.json');
 
 class StopLogCommand extends Command {
     constructor() {
@@ -21,7 +20,7 @@ class StopLogCommand extends Command {
 
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription('Bot logging has been turned off.')
             .setTimestamp(today);
@@ -33,10 +32,7 @@ class StopLogCommand extends Command {
             (err, res) => {
                 if (err) {
                     // eslint-disable-next-line no-new
-                    new Error(
-                        'Error at line 23 Guild.findOne() stoplog.js',
-                        err
-                    );
+                    new Error('Error at line 23 Guild.findOne() stoplog.js', err);
                 }
                 if (!res) {
                     const newGuild = new Guild({
@@ -52,24 +48,12 @@ class StopLogCommand extends Command {
                     newGuild
                         .save()
                         .then(message.util.send(embed))
-                        .catch(
-                            e =>
-                                new Error(
-                                    'Error at newGuild.save() line 44 stoplog.js',
-                                    e
-                                )
-                        );
+                        .catch(e => new Error('Error at newGuild.save() line 44 stoplog.js', e));
                 } else {
                     res.guildLogActive = false;
                     res.save()
                         .then(message.util.send(embed))
-                        .catch(
-                            e =>
-                                new Error(
-                                    'Failed to save res at line 64 stoplog.js',
-                                    e
-                                )
-                        );
+                        .catch(e => new Error('Failed to save res at line 64 stoplog.js', e));
                 }
             }
         );

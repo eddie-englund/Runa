@@ -1,7 +1,5 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 const Guild = require('../../models/guild.js');
-const log = require('../../util/log');
 
 class StartLogCommand extends Command {
     constructor() {
@@ -22,7 +20,7 @@ class StartLogCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription('Logging has now been turned on!')
             .addField('**Turned on by user**: ', message.author.tag)
@@ -40,14 +38,8 @@ class StartLogCommand extends Command {
                 } else {
                     res.guildLogActive = true;
                     res.save()
-                        .then(log(message, embed))
-                        .catch(
-                            e =>
-                                new Error(
-                                    'Failed to save res at line 44 startlog.js',
-                                    e
-                                )
-                        );
+                        .then(this.client.log(message, embed))
+                        .catch(e => new Error('Failed to save res at line 44 startlog.js', e));
                 }
             }
         );

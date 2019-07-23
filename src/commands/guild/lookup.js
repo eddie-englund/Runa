@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 
 class LookUpCommand extends Command {
     constructor() {
@@ -30,11 +29,8 @@ class LookUpCommand extends Command {
         const today = new Date();
         const embed = message.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                message.author.username,
-                message.author.displayAvatarURL()
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(message.author.username, message.author.displayAvatarURL())
             .setThumbnail(User.user.displayAvatarURL())
             .addField('**User**:', User.user.tag, true)
             .addField('**Username**: ', User.user.username, true)

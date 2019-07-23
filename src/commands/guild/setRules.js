@@ -1,18 +1,10 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 const Guild = require('../../models/guild.js');
-const msg = require('../../util/msg');
 
 class newRulesCommand extends Command {
     constructor() {
         super('guildRules', {
-            aliases: [
-                'setrules',
-                'newrules',
-                'guildrules',
-                'serverrules',
-                'srules'
-            ],
+            aliases: ['setrules', 'newrules', 'guildrules', 'serverrules', 'srules'],
             clientPermissions: ['SEND_MESSAGES'],
             userPermissions: ['ADMINISTRATOR'],
             args: [
@@ -43,14 +35,9 @@ class newRulesCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                message.author.username,
-                message.author.displayAvatarURL()
-            )
-            .setDescription(
-                'A admin has set new rules! Check them out with the rules command'
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(message.author.username, message.author.displayAvatarURL())
+            .setDescription('A admin has set new rules! Check them out with the rules command')
             .addField('**User**:', message.author.username, true)
             .addField('**UserID**: ', message.author.id, true)
             .setTimestamp(today);
@@ -77,21 +64,15 @@ class newRulesCommand extends Command {
                     });
                     return newGuild
                         .save()
-                        .then(msg(message, embed))
-                        .catch(
-                            e =>
-                                new Error(
-                                    'Failed to save newGuild in rules.js',
-                                    e
-                                )
-                        );
+                        .then(this.client.msg(message, embed))
+                        .catch(e => new Error('Failed to save newGuild in rules.js', e));
                 } else {
                     res.guildRules = args.rules;
                     res.guildRulesUser = message.author.username;
                     res.guildRulesUserID = message.author.id;
                     return res
                         .save()
-                        .then(msg(message, embed))
+                        .then(this.client.msg(message, embed))
                         .catch(e => new Error('Failed to save new res', e));
                 }
             }

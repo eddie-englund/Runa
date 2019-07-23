@@ -1,7 +1,5 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 const User = require('../../models/user');
-const msg = require('../../util/msg');
 
 class PardonCommand extends Command {
     constructor() {
@@ -31,21 +29,17 @@ class PardonCommand extends Command {
         const today = new Date();
         const channelEmbed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription([
-                `User ${message.author.tag} has pardoned ${
-                    args.member.user.tag
-                }`,
-                `All warnings has been cleared from user ${
-                    args.member.user.tag
-                }`
+                `User ${message.author.tag} has pardoned ${args.member.user.tag}`,
+                `All warnings has been cleared from user ${args.member.user.tag}`
             ])
             .addField('**Reason:**', args.reason)
             .setTimestamp(today);
         const logEmbed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .addField('**User:**', args.member.user.username, true)
             .addField('**User id:**', args.member.user.tag, true)
@@ -61,20 +55,13 @@ class PardonCommand extends Command {
             (err, res) => {
                 if (err) {
                     // eslint-disable-next-line no-new
-                    return new Error(
-                        'Error at User.findOne line 60 pardon.js',
-                        err
-                    );
+                    return new Error('Error at User.findOne line 60 pardon.js', err);
                 }
                 if (!res) {
-                    return message.reply(
-                        'This user does not have any warnings!'
-                    );
+                    return message.reply('This user does not have any warnings!');
                 } else {
                     res.warnings = 0;
-                    return res
-                        .save()
-                        .then(msg(message, logEmbed, channelEmbed));
+                    return res.save().then(this.client.msg(message, logEmbed, channelEmbed));
                 }
             }
         );

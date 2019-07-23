@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 const Guild = require('../../models/guild');
 
 class SetLogCommand extends Command {
@@ -38,13 +37,9 @@ class SetLogCommand extends Command {
 
         const guildEmbed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setDescription(
-                `A new log channel has been set! The new channel is ${
-                    args.cName
-                }`
-            )
+            .setDescription(`A new log channel has been set! The new channel is ${args.cName}`)
             .setTimestamp(Date());
 
         Guild.findOne(

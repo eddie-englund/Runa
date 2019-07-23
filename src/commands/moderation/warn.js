@@ -1,7 +1,5 @@
 const { Command } = require('discord-akairo');
 const User = require('../../models/user');
-const { main } = require('../../../colors.json');
-const msg = require('../../util/msg');
 
 class warnCommand extends Command {
     constructor() {
@@ -39,43 +37,29 @@ class warnCommand extends Command {
 
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been warned`,
                 args.member.user.displayAvatarURL
             )
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)
-            .addField(
-                '**User Discriminator**:',
-                args.member.user.discriminator,
-                true
-            )
+            .addField('**User Discriminator**:', args.member.user.discriminator, true)
             .addField('**User CreatedAt**', args.member.user.createdAt, true)
             .setTimestamp(today)
-            .setFooter(
-                `Warned by ${message.author.username}, id: ${message.author.id}`
-            );
+            .setFooter(`Warned by ${message.author.username}, id: ${message.author.id}`);
 
         const kickEmbed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(
                 `Kicked user ${args.member.user.username}`,
                 args.member.user.displayAvatarURL
             )
             .addField('**User**:', args.member.user.username, true)
             .addField('**UserID**:', args.member.user.id, true)
-            .addField(
-                '**User Discriminator**:',
-                args.member.user.discriminator,
-                true
-            )
-            .addField(
-                '**User Account created at**:',
-                args.member.user.createdAt,
-                true
-            )
+            .addField('**User Discriminator**:', args.member.user.discriminator, true)
+            .addField('**User Account created at**:', args.member.user.createdAt, true)
             .setTimestamp(today);
 
         User.findOne(
@@ -107,7 +91,7 @@ class warnCommand extends Command {
                     return newUser
                         .save()
                         .catch(e => new Error('newUser failed to save', e))
-                        .then(msg(message, embed));
+                        .then(this.client.msg(message, embed));
                 } else {
                     res.warnings += 1;
                     res.warners.push({
@@ -120,22 +104,14 @@ class warnCommand extends Command {
                     case 3:
                         args.member
                             .kick()
-                            .then(msg(message, kickEmbed))
-                            .catch(
-                                e => new Error('Failed to kicked user', e)
-                            );
+                            .then(this.client.msg(message, kickEmbed))
+                            .catch(e => new Error('Failed to kicked user', e));
                     }
 
                     return res
                         .save()
-                        .catch(
-                            e =>
-                                new Error(
-                                    'res.save at warn.js failed to save',
-                                    e
-                                )
-                        )
-                        .then(msg(message, embed))
+                        .catch(e => new Error('res.save at warn.js failed to save', e))
+                        .then(this.client.msg(message, embed))
                         .catch(e => new Error('Failed to kick user', e));
                 }
             }

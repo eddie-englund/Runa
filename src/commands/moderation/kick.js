@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
-const msg = require('../../util/msg');
 
 class kickCommand extends Command {
     constructor() {
@@ -40,11 +38,8 @@ class kickCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
-            .setAuthor(
-                args.member.user.username,
-                args.member.user.displayAvatarURL
-            )
+            .setColor(this.client.color.blue)
+            .setAuthor(args.member.user.username, args.member.user.displayAvatarURL)
             .addField('Kicked user: ', args.member.user.username, true)
             .addField('Kicked userID:', args.member.user.id, true)
             .addField('Kicked by:', message.author.username)
@@ -53,7 +48,7 @@ class kickCommand extends Command {
 
         return args.member.user
             .kick()
-            .then(msg(message, embed))
+            .then(this.client.msg(message, embed))
             .catch(e => new Error('Failed to kick user', e));
     }
 }

@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { main } = require('../../../colors.json');
 const Guild = require('../../models/guild');
 
 class BanAmountCommand extends Command {
@@ -11,8 +10,7 @@ class BanAmountCommand extends Command {
             channel: 'guild',
             gategory: 'guild',
             description: {
-                content:
-                    'Sends info about all the bans that the bot has done on the server'
+                content: 'Sends info about all the bans that the bot has done on the server'
             }
         });
     }
@@ -31,18 +29,11 @@ class BanAmountCommand extends Command {
                 const today = new Date();
                 const embed = this.client.util
                     .embed()
-                    .setColor(main)
-                    .setAuthor(
-                        message.author.tag,
-                        message.author.displayAvatarURL
-                    )
+                    .setColor(this.client.color.blue)
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL)
                     .setDescription([
                         `This guild has ${res.bans} logged bans`,
-                        `Latest banned user: ${
-                            res.guildBans[res.guildbans.length].username
-                        }. Banned at ${
-                            res.guildBans[res.guildBans.length].date
-                        }`
+                        `Latest banned user: ${res.guildBans[res.guildbans.length].username}. Banned at ${res.guildBans[res.guildBans.length].date}`
                     ])
                     .setTimestamp(today);
                 return message.util.send(embed);

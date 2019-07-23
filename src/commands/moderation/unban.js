@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const msg = require('../../util/msg');
-const { main } = require('../../../colors.json');
 
 class UnbanCommand extends Command {
     constructor() {
@@ -35,7 +33,7 @@ class UnbanCommand extends Command {
         const today = new Date();
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(message.author.username, message.author.displayAvatarURL)
             .setDescription(`User: <@${args.user}> has been unbanned`)
             .addField('**Unbanned by:**', message.author)
@@ -47,11 +45,9 @@ class UnbanCommand extends Command {
             if (e) {
                 // eslint-disable-next-line no-console
                 console.log(e);
-                return message.reply(
-                    `Something went wrong! Error message: ${e.message}`
-                );
+                return message.reply(`Something went wrong! Error message: ${e.message}`);
             } else {
-                return msg(message, embed);
+                return this.client.msg(message, embed);
             }
         });
         return undefined;

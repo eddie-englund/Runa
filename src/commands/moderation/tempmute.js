@@ -1,8 +1,5 @@
 const { Command } = require('discord-akairo');
 const ms = require('ms');
-const { main } = require('../../../colors.json');
-const msg = require('../../util/msg');
-const log = require('../../util/log');
 
 class TempMuteCommand extends Command {
     constructor() {
@@ -48,9 +45,7 @@ class TempMuteCommand extends Command {
         const tomute = args.member;
         const today = new Date();
 
-        let muterole = message.guild.roles.find(
-            muted => muted.name === 'muted'
-        );
+        let muterole = message.guild.roles.find(muted => muted.name === 'muted');
         if (!muterole) {
             try {
                 // eslint-disable-next-line require-atomic-updates
@@ -73,7 +68,7 @@ class TempMuteCommand extends Command {
 
         const channelEmbed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been muted for ${args.time}`,
                 args.member.user.displayAvatarURL
@@ -85,37 +80,27 @@ class TempMuteCommand extends Command {
 
         const embed = this.client.util
             .embed()
-            .setColor(main)
+            .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been muted`,
                 args.member.user.displayAvatarURL
             )
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)
-            .addField(
-                '**User Discriminator**:',
-                args.member.user.discriminator,
-                true
-            )
+            .addField('**User Discriminator**:', args.member.user.discriminator, true)
             .addField('**Muted for**:', args.reason, true)
             .addField('**Muted by**:', message.author.username, true)
             .addField('**Mute time**:', args.time, true)
-            .addField(
-                '**User account created at**',
-                args.member.user.createdAt,
-                true
-            )
+            .addField('**User account created at**', args.member.user.createdAt, true)
             .setTimestamp(today)
-            .setFooter(
-                `Muted by ${message.author.username}, id: ${message.author.id}`
-            );
+            .setFooter(`Muted by ${message.author.username}, id: ${message.author.id}`);
         const unmuted = `<@${tomute.id}> has been unmuted!`;
         await tomute.addRole(muterole.id);
-        msg(message, embed, channelEmbed);
+        this.client.msg(message, embed, channelEmbed);
 
         return setTimeout(() => {
             tomute.removeRole(muterole.id);
-            log(message, unmuted);
+            this.client.log(message, unmuted);
         }, ms(args.time));
     }
 }
