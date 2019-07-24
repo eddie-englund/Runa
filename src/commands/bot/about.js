@@ -16,26 +16,28 @@ class AboutCommand extends Command {
     }
 
     exec(message) {
-        const today = new Date();
-        const embed = this.client.util
-            .embed()
-            .setColor(this.client.color.blue)
-            .setAuthor(message.author.username, message.author.displayAvatarURL())
-            .setThumbnail(this.client.user.displayAvatarURL())
-            .setDescription([
-                '**Hi! My name is Runa and I\'m a moderation bot**!',
-                '',
-                'You can read more about me here: https://github.com/TitusEntertainment/Runa',
-                '',,
+        this.handler.prefix(message).then(prefix => {
+            const today = new Date();
+            const embed = this.client.util
+                .embed()
+                .setColor(this.client.color.blue)
+                .setAuthor(message.author.username, message.author.displayAvatarURL())
+                .setThumbnail(this.client.user.displayAvatarURL())
+                .setDescription([
+                    '**Hi! My name is Runa and I\'m a moderation bot**!',
+                    '',
+                    'You can read more about me here: https://github.com/TitusEntertainment/Runa',
+                    '',,
 
-                'By default the prefix that I react to is: **!**',
-                '',
-                'To get help with commands write **@runa help** or **!help**.',
-                ''
-            ])
-            .setFooter('Created by https://github.com/TitusEntertainment')
-            .setTimestamp(today);
-        return message.channel.send(embed);
+                    'By default the prefix that I react to is: **!**',
+                    '',
+                    `To get help with commands write **@runa help** or **${prefix}help**.`,
+                    ''
+                ])
+                .setFooter('Created by https://github.com/TitusEntertainment')
+                .setTimestamp(today);
+            return message.channel.send(embed);
+        });
     }
 }
 

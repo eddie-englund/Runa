@@ -13,7 +13,13 @@ class ConfigCommand extends Command {
                 {
                     id: 'newSetting'
                 }
-            ]
+            ],
+            channel: 'guild',
+            category: 'guild',
+            description: {
+                content: '**shows** or **sets**guild specific settings like the prefix.',
+                usage: ['prefix <new prefix>']
+            }
         });
     }
 

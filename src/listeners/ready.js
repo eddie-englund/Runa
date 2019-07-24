@@ -9,7 +9,7 @@ class ReadyEvent extends Listener {
     }
 
     exec() {
-        this.client.user.setActivity('!help', { type: 'LISTENING' });
+        this.client.user.setActivity('@runa help', { type: 'LISTENING' });
         this.client.logger.info('Runa bot has connected');
     }
 }
