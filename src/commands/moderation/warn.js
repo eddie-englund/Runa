@@ -60,6 +60,21 @@ class warnCommand extends Command {
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**User Discriminator**:', args.member.user.discriminator, true)
             .addField('**User Account created at**:', args.member.user.createdAt, true)
+            .addField('**Reason**:', 'Exceeded 2 warnings')
+            .setTimestamp(today);
+
+        const banEmbed = this.client.util
+            .embed()
+            .setColor(this.client.color.blue)
+            .setAuthor(
+                `Banned user ${args.member.user.username}`,
+                args.member.user.displayAvatarURL
+            )
+            .addField('**User**:', args.member.user.username, true)
+            .addField('**UserID**:', args.member.user.id, true)
+            .addField('**User Discriminator**:', args.member.user.discriminator, true)
+            .addField('**User Account created at**:', args.member.user.createdAt, true)
+            .addField('**Reason**:', 'Exceeded 3 warnings')
             .setTimestamp(today);
 
         User.findOne(
@@ -101,11 +116,29 @@ class warnCommand extends Command {
                     });
                     res.warnDate.push(today);
                     switch (res.warnings) {
+                    case 2:
+                        embed.addField(
+                            'Kick',
+                            'If you exceed two warnings you will be kicked from the server.'
+                        );
+                        break;
                     case 3:
                         args.member
                             .kick()
                             .then(this.client.msg(message, kickEmbed))
                             .catch(e => new Error('Failed to kicked user', e));
+                        break;
+                    case 4:
+                        args.meber
+                            .ban()
+                            .then(this.client.msg(message, banEmbed))
+                            .catch(e =>
+                                this.client.logger.error(
+                                    { event: 'error' },
+                                    `Error message: ${e.message}`,
+                                    `Error: ${e}`
+                                )
+                            );
                     }
 
                     return res

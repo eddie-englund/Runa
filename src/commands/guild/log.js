@@ -54,8 +54,7 @@ class SetLogCommand extends Command {
                 if (!res) {
                     const newGuild = new Guild({
                         guildID: message.guild.id,
-                        guildOwner: message.guild.owner.username,
-                        guildOwnerID: message.guild.owner.id,
+                        guildName: message.guild.name,
                         guildRules: '',
                         guildRulesUser: '',
                         guildRulesUserID: '',
