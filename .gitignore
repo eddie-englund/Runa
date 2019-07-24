@@ -4,3 +4,4 @@ node_modules
 yarn.lock
 test.js
 *.log
+eval.js
