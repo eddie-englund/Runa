@@ -15,10 +15,9 @@ Runa is a discord bot written in javascript with [discord.js](https://discord.js
 1. Make sure you have installed [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [yarn](https://yarnpkg.com/).
 2. Clone this repository with `git clone https://github.com/https://github.com/TitusEntertainment/Runa`.
 3. Run `cd Runa/src` to move into the folder that you just created.
-4. Create a file named `.env` and fill it out as shown in `.env.md`.
+4. Create a file named `.env` and fill it out as shown in `.env.example`.
 5. Now go back into the terminal and run `yarn add`.
-6. After you've installed all the dependencies run `yarn add global add pm2.
-7. Open the terminal again and run `cd src`.
+6. After you've installed all the dependencies run `yarn global add pm2.
 
 ### You're now ready to start the bot!
 
