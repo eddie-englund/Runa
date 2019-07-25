@@ -8,7 +8,7 @@ class ErrorEventListener extends Listener {
     }
 
     exec(error) {
-        this.client.logger.error({ event: 'error' }, error.message, error);
+        this.client.logger.error({ event: 'error' }`${error}`);
     }
 }
 

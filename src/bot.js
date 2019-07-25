@@ -18,6 +18,7 @@ class RunaClient extends AkairoClient {
         );
 
         this.commandHandler = new CommandHandler(this, {
+            // Per guild prefix
             prefix: async msg => {
                 const setting = await client.getGuild(msg.guild);
                 return setting.prefix;
