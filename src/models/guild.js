@@ -26,7 +26,7 @@ const GuildSchema = new Schema({
     },
     guildRules: {
         type: String,
-        default: ''
+        default: 'No rules has been set'
     }
 });
 

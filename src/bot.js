@@ -49,6 +49,7 @@ client.logger = require('./util/winston');
 client.config = require('./util/config');
 client.model = require('./models/index');
 require('./util/functions')(client);
+require('./util/embeds')(client);
 
 // Final steps
 client.mongoose.init();

@@ -66,7 +66,25 @@ class ConfigCommand extends Command {
                 this.client.msg(guildEmbed);
             } catch (e) {
                 this.client.logger.error({ event: 'error' }`${e}`);
-                message.reply(`Looks like something went wrong! Error message: ${e.message}`);
+                return message.reply(
+                    `Looks like something went wrong! Error message: ${e.message}`
+                );
+            }
+            break;
+        }
+        case 'rules': {
+            const embed = await this.client.rulesEmbed(message, settings);
+            if (!args.newSetting || args.newSetting.length.length < 1) {
+                return message.util.send(embed);
+            }
+            const newRulesEmbed = await this.client.newRulesEmbed(message, settings);
+            try {
+                await this.client.updateGuild(message.guild, { guildRules: args.newSetting });
+                message.util.send(newRulesEmbed);
+            } catch (e) {
+                return message.reply(
+                    `Looks like something went wrong! Error message: ${e.message}`
+                );
             }
             break;
         }
