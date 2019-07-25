@@ -83,10 +83,29 @@ Added:
 
 Changed a lot of code to work with discord.js@master and discord-akairo@master (there might still be bugs)
 
-"missed date"
+### "missed date"
 
 Added:
 
 - log command and updated util
 - pardon commad
 - bans command
+
+### Missed date2"
+
+**Major overhaul over several days.**
+
+Added utility add a lot of things to the client.
+
+added to the client:
+
+- mongoose
+- winston
+- models
+- db functions
+- colors
+
+Also added:
+
+- guild settings
+- updated guild and user db models
