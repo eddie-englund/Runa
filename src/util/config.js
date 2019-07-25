@@ -3,6 +3,12 @@ module.exports = {
     prefix: '!',
     defaultSettings: {
         prefix: '!',
-        log: 'modlog'
+        log: 'modlog',
+        user: {
+            username: String,
+            userID: String,
+            usertag: String,
+            warnings: Number
+        }
     }
 };

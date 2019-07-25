@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Guild = require('../../models/guild.js');
 
 class StartLogCommand extends Command {
     constructor() {
@@ -27,19 +26,19 @@ class StartLogCommand extends Command {
             .addField('**User id**:', message.author.id)
             .setTimestamp(today);
 
-        Guild.findOne(
+        this.client.Guild.findOne(
             {
                 guildID: message.guild.id
             },
             (err, res) => {
-                if (err) new Error('Erro at line 24 startlog.js', err);
-                if (!res) {
+                if (err) this.client.logger.error({ event: 'error' }`${err}`);
+                if (!res || res.guildLogActive === true) {
                     message.reply('The logs are already on!');
                 } else {
                     res.guildLogActive = true;
                     res.save()
                         .then(this.client.log(message, embed))
-                        .catch(e => new Error('Failed to save res at line 44 startlog.js', e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 }
             }
         );

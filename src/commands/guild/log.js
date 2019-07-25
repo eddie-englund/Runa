@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Guild = require('../../models/guild');
 
 class SetLogCommand extends Command {
     constructor() {
@@ -42,7 +41,7 @@ class SetLogCommand extends Command {
             .setDescription(`A new log channel has been set! The new channel is ${args.cName}`)
             .setTimestamp(Date());
 
-        Guild.findOne(
+        this.client.model.Guild.findOne(
             {
                 guildID: message.guild.id
             },
@@ -52,7 +51,7 @@ class SetLogCommand extends Command {
                     new Error('Error at Guild.findOne() line 27 log.js', err);
                 }
                 if (!res) {
-                    const newGuild = new Guild({
+                    const newGuild = new this.client.model.Guild({
                         guildID: message.guild.id,
                         guildName: message.guild.name,
                         guildRules: '',
@@ -65,14 +64,12 @@ class SetLogCommand extends Command {
                     newGuild
                         .save()
                         .then(message.reply(guildEmbed))
-                        // eslint-disable-next-line no-console
-                        .catch(e => console.log(e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 } else {
                     res.guildLog = args.cName;
                     res.save()
                         .then(message.util.send(guildEmbed))
-                        // eslint-disable-next-line no-console
-                        .catch(e => console.log(e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 }
             }
         );

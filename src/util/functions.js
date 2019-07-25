@@ -1,6 +1,6 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-prototype-builtins */
-const { Guild } = require('../models');
+const { Guild, User } = require('../models');
 const mongoose = require('mongoose');
 const logger = require('./winston');
 
@@ -9,6 +9,18 @@ module.exports = client => {
         const data = await Guild.findOne({ guildID: guild.id });
         if (data) return data;
         else return client.config.defaultSettings;
+    };
+
+    client.getUser = async user => {
+        const data = await User.findOne({ userID: user.id });
+        if (data) return data;
+        else throw new Error('Failed to supply valid user data');
+    };
+
+    client.deleteUser = async user => {
+        const data = await User.deleteOne({ userID: user.id });
+        if (data) return data;
+        else throw new Error('Failed to supply valid user data');
     };
 
     client.updateGuild = async (guild, settings) => {

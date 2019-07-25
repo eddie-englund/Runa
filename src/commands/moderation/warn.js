@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const User = require('../../models/user');
 
 class warnCommand extends Command {
     constructor() {
@@ -77,7 +76,7 @@ class warnCommand extends Command {
             .addField('**Reason**:', 'Exceeded 3 warnings')
             .setTimestamp(today);
 
-        User.findOne(
+        this.client.model.User.findOne(
             {
                 userID: args.member.user.id,
                 guildID: message.guild.id
@@ -85,7 +84,7 @@ class warnCommand extends Command {
             (err, res) => {
                 if (err) throw new Error('MongoDB error at warn.js line 76-80');
                 if (!res) {
-                    const newUser = new User({
+                    const newUser = new this.client.model.User({
                         userID: args.member.user.id,
                         username: args.member.user.username,
                         guildID: message.guild.id,

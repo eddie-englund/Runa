@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const User = require('../../models/user');
 
 class PardonCommand extends Command {
     constructor() {
@@ -11,7 +10,11 @@ class PardonCommand extends Command {
             args: [
                 {
                     id: 'member',
-                    type: 'member'
+                    type: 'member',
+                    prompt: {
+                        start: 'You need to include a user!',
+                        optional: false
+                    }
                 },
                 {
                     id: 'reason',
@@ -48,20 +51,22 @@ class PardonCommand extends Command {
             .addField('Pardoned by id: ', message.author.tag, true)
             .setTimestamp(today);
 
-        User.findOne(
+        this.client.model.User.findOne(
             {
-                userID: message.author.id
+                userID: args.member.user.id
             },
             (err, res) => {
-                if (err) {
-                    // eslint-disable-next-line no-new
-                    return new Error('Error at User.findOne line 60 pardon.js', err);
-                }
+                if (err) this.client.logger.error({ event: 'error' }`${err}`);
                 if (!res) {
                     return message.reply('This user does not have any warnings!');
                 } else {
                     res.warnings = 0;
-                    return res.save().then(this.client.msg(message, logEmbed, channelEmbed));
+                    return res
+                        .save()
+                        .then(this.client.msg(message, channelEmbed, logEmbed))
+                        .catch(e => {
+                            this.client.logger.error({ event: 'error' }`${e}`);
+                        });
                 }
             }
         );

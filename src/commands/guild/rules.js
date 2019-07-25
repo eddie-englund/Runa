@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Guild = require('../../models/guild');
 
 class RulesCommand extends Command {
     constructor() {
@@ -18,19 +17,19 @@ class RulesCommand extends Command {
     exec(message) {
         const today = new Date();
 
-        Guild.findOne(
+        this.client.model.Guild.findOne(
             {
                 guildID: message.guild.id
             },
             (err, res) => {
-                if (err) {
-                    // eslint-disable-next-line no-new
-                    new Error('Error at line 17 Guild.findOne rules.js', err);
-                }
+                if (err) this.client.logger.error({ event: 'error' }`${err}`);
                 if (!res) {
                     return message.reply('This guild has not set any rules.');
-                }
-                if (res.guildRules.length === 0 || res.guildRules.length < 1 || !res.guildRules) {
+                } else if (
+                    res.guildRules.length === 0
+                    || res.guildRules.length < 1
+                    || !res.guildRules
+                ) {
                     return message.reply('This guild has not set any rules.');
                 }
                 const embed = this.client.util

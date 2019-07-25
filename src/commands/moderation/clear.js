@@ -15,7 +15,12 @@ class clearCommand extends Command {
             args: [
                 {
                     id: 'amount',
-                    type: 'number'
+                    type: 'number',
+                    prompt: {
+                        start: 'You need to include an amount of messages to remove!',
+                        retry: '...Really? How hard can it be? Include a number from 1-100...',
+                        optional: false
+                    }
                 }
             ]
         });
@@ -31,12 +36,9 @@ class clearCommand extends Command {
         try {
             await message.delete();
             await message.channel.bulkDelete(args.amount);
-            return message
-                .reply(`Cleared ${args.amount} messages.`)
-                .then(msg => msg.delete(5000));
+            return message.reply(`Cleared ${args.amount} messages.`).then(msg => msg.delete(5000));
         } catch (e) {
-            // eslint-disable-next-line no-new
-            new Error('Clear command error', e);
+            this.client.logger.error({ event: 'error' }`${e}`);
             return message.reply('You can only delete 1-100 messages!');
         }
     }

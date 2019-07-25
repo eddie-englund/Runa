@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Guild = require('../../models/guild');
 
 class StopLogCommand extends Command {
     constructor() {
@@ -25,17 +24,14 @@ class StopLogCommand extends Command {
             .setDescription('Bot logging has been turned off.')
             .setTimestamp(today);
 
-        Guild.findOne(
+        this.client.model.Guild.findOne(
             {
                 guildID: message.guild.id
             },
             (err, res) => {
-                if (err) {
-                    // eslint-disable-next-line no-new
-                    new Error('Error at line 23 Guild.findOne() stoplog.js', err);
-                }
+                if (err) this.client.logger.error({ event: 'error' }`${err}`);
                 if (!res) {
-                    const newGuild = new Guild({
+                    const newGuild = new this.client.model.Guild({
                         guildID: message.guild.id,
                         guildOwner: message.guild.owner.username,
                         guildOwnerID: message.guild.ownerid,
@@ -48,12 +44,12 @@ class StopLogCommand extends Command {
                     newGuild
                         .save()
                         .then(message.util.send(embed))
-                        .catch(e => new Error('Error at newGuild.save() line 44 stoplog.js', e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 } else {
                     res.guildLogActive = false;
                     res.save()
                         .then(message.util.send(embed))
-                        .catch(e => new Error('Failed to save res at line 64 stoplog.js', e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 }
             }
         );

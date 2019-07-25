@@ -27,12 +27,9 @@ class kickCommand extends Command {
 
     exec(message, args) {
         if (!args.member || args.member.length < 1) {
-            return (
-                message
-                    .reply('You need to include a member to kick!')
-                    // eslint-disable-next-line no-shadow
-                    .then(msg => msg.delete(5000))
-            );
+            return message
+                .reply('You need to include a member to kick!')
+                .then(msg => msg.delete(5000));
         }
 
         const today = new Date();
@@ -46,10 +43,10 @@ class kickCommand extends Command {
             .addField('Kicked by id:', message.author.id)
             .setTimestamp(today);
 
-        return args.member.user
-            .kick()
+        return args.member
+            .kick({ reason: args.reason })
             .then(this.client.msg(message, embed))
-            .catch(e => new Error('Failed to kick user', e));
+            .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
     }
 }
 

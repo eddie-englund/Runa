@@ -46,7 +46,7 @@ client.log = require('./util/log');
 client.msg = require('./util/msg');
 client.logger = require('./util/winston');
 client.config = require('./util/config');
-client.index = require('./models/index');
+client.model = require('./models/index');
 require('./util/functions')(client);
 
 // Final steps

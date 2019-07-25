@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const User = require('../../models/user');
-const Guild = require('../../models/guild');
 
 class banCommand extends Command {
     constructor() {
@@ -17,7 +15,8 @@ class banCommand extends Command {
             args: [
                 {
                     id: 'member',
-                    type: 'memberMention'
+                    type: 'memberMention',
+                    prompt: 'You need to include a valid user!'
                 },
                 {
                     id: 'reason',
@@ -51,94 +50,17 @@ class banCommand extends Command {
             .setTimestamp(today)
             .setFooter(`Banned by ${message.author.username}, id: ${message.author.id}`);
 
-        await User.findOne(
-            {
-                guildID: message.guild.id,
-                userID: args.member.user.id
-            },
-            (err, res) => {
-                // eslint-disable-next-line no-new
-                if (err) new Error('Failed at User.findOne() in ban.js', err);
-                if (!res) {
-                    return args.member
-                        .ban()
-                        .then(this.client.msg(message, embed))
-                        .catch(e =>
-                            this.client.logger.error(
-                                { event: 'error' },
-                                'Failed to ban',
-                                `Error message: ${e.message}`,
-                                `Error: ${e}`
-                            )
-                        );
-                } else {
-                    message.guild.ban(args.member.member, 2);
-                    return res
-                        .deleteOne({
-                            userID: args.member.user.id,
-                            guildID: message.author.id
-                        })
-                        .then(res.save())
-                        .then(this.client.msg(message, embed), args.member.ban())
-                        .catch(e =>
-                            this.client.logger.error(
-                                { event: 'error' },
-                                `Error message: ${e.message}`,
-                                `Error: ${e}`
-                            )
-                        );
-                }
-            }
-        ).then(
-            Guild.findOne(
-                {
-                    guildID: message.guild.id
-                },
-                (res, err) => {
-                    if (err) {
-                        this.client.logger.error(
-                            { event: 'error' },
-                            `Error message: ${err.message}`,
-                            `Error ${err}`
-                        );
-                    }
+        const banInfo = {
+            userID: args.member.user.id,
+            username: args.member.user.tag,
+            date: today
+        };
 
-                    if (!res) {
-                        const newGuild = new Guild({
-                            guildID: message.guild.id,
-                            guildOwner: message.guild.owner.username,
-                            guildOwnerID: message.guild.ownerid,
-                            guildRules: args.rules,
-                            guildRulesUser: message.author.username,
-                            guildRulesUserID: message.author.id,
-                            bans: 1,
-                            guildBans: [
-                                {
-                                    userID: args.member.user.id,
-                                    username: args.member.user.tag,
-                                    date: today
-                                }
-                            ],
-                            date: today
-                        });
-                        newGuild
-                            .save()
-                            .catch(e => new Error('Failed saving new guild line 121 ban.js', e));
-                    } else {
-                        res.bans += 1;
-                        res.guildBans.push({
-                            userID: args.member.user.id,
-                            username: args.member.user.tag,
-                            date: today
-                        });
-                        res.save().catch(
-                            e => new Error('Failed to save res at line 138 ban.js', e)
-                        );
-                    }
-                }
-            )
-        );
-        return undefined;
+        await this.client.deleteUser(args.member.user);
+        const Guild = await this.client.getGuild(message.guild);
+        const newBans = Guild.bans += 1;
+        await this.client.updateGuild(message.guild, { bans: newBans, guildBans: [banInfo] });
+        return args.member.ban({ days: 3, reason: args.reason }).then(this.client.msg(message, embed));
     }
 }
 

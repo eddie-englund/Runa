@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Guild = require('../../models/guild.js');
 
 class newRulesCommand extends Command {
     constructor() {
@@ -42,17 +41,14 @@ class newRulesCommand extends Command {
             .addField('**UserID**: ', message.author.id, true)
             .setTimestamp(today);
 
-        Guild.findOne(
+        this.client.model.Guild.findOne(
             {
                 guildID: message.guild.id
             },
             (err, res) => {
-                if (err) {
-                    // eslint-disable-next-line no-new
-                    new Error('Error at Guild.findOne rules.js line 29', err);
-                }
+                if (err) this.client.logger.error({ event: 'error' }`${err}`);
                 if (!res) {
-                    const newGuild = new Guild({
+                    const newGuild = new this.client.model.Guild({
                         guildID: message.guild.id,
                         guildOwner: message.guild.owner.username,
                         guildOwnerID: message.guild.ownerid,
@@ -65,7 +61,7 @@ class newRulesCommand extends Command {
                     return newGuild
                         .save()
                         .then(this.client.msg(message, embed))
-                        .catch(e => new Error('Failed to save newGuild in rules.js', e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 } else {
                     res.guildRules = args.rules;
                     res.guildRulesUser = message.author.username;
@@ -73,7 +69,7 @@ class newRulesCommand extends Command {
                     return res
                         .save()
                         .then(this.client.msg(message, embed))
-                        .catch(e => new Error('Failed to save new res', e));
+                        .catch(e => this.client.logger.error({ event: 'error' }`${e}`));
                 }
             }
         );
