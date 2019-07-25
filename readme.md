@@ -49,8 +49,11 @@ To start the bot run `pm2 start bot.js`
 - **log:** Sets a new log channel (default is modlogs)
 - **bans:** Sends info about how many bans the guild has banned with the bot and the latest user to get banned
 - **config:** Lets user either see or change guild specific settings, like log channel and prefix.
+  b
 
 ## Author
+
+<img src="https://i.imgur.com/rAvP1k0.jpg" width="100" height="100" align="right" style="float: right; margin: 0 10px 0 0;" alt="Runa" >
 
 **Runa** © [Titus](https://github.com/TitusEntertainment).  
 Authored and maintained by TitusEntertainment.
