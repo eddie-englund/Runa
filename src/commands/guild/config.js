@@ -18,7 +18,7 @@ class ConfigCommand extends Command {
             category: 'guild',
             description: {
                 content: '**shows** or **sets**guild specific settings like the prefix.',
-                usage: ['prefix <new prefix>', 'log <new log channel name>']
+                usage: ['prefix <new prefix>', 'log <new log channel name>', 'startlog', 'stoplog']
             }
         });
     }
@@ -75,22 +75,14 @@ class ConfigCommand extends Command {
         }
 
         case 'startlog': {
-            if (!args.newSetting || args.newSetting.length < 1) {
-                return message.reply(`Logging is: ${settings.guildlogActive}`);
-            } else {
-                await this.client.updateGuild(message.guild, { guildlogActive: true });
-                message.reply('Logging has been activated');
-            }
+            await this.client.updateGuild(message.guild, { guildlogActive: true });
+            message.reply('Logging has been activated');
             break;
         }
 
         case 'stoplog': {
-            if (!args.newSetting || args.newSetting.length < 1) {
-                return message.reply(`Logging is: ${settings.guildlogActive}`);
-            } else {
-                await this.client.updateGuild(message.guild, { guildLogActive: false });
-                message.reply('Logging has been deactivated');
-            }
+            await this.client.updateGuild(message.guild, { guildLogActive: false });
+            message.reply('Logging has been deactivated');
             break;
         }
         case 'rules': {
