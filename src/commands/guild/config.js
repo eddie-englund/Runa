@@ -25,6 +25,7 @@ class ConfigCommand extends Command {
 
     async exec(message, args) {
         const settings = await this.client.getGuild(message.guild);
+
         switch (args.settings) {
         case 'prefix': {
             if (!args.newSetting || args.newSetting.lenth < 1) {
@@ -69,6 +70,26 @@ class ConfigCommand extends Command {
                 return message.reply(
                     `Looks like something went wrong! Error message: ${e.message}`
                 );
+            }
+            break;
+        }
+
+        case 'startlog': {
+            if (!args.newSetting || args.newSetting.length < 1) {
+                return message.reply(`Logging is: ${settings.guildlogActive}`);
+            } else {
+                await this.client.updateGuild(message.guild, { guildlogActive: true });
+                message.reply('Logging has been activated');
+            }
+            break;
+        }
+
+        case 'stoplog': {
+            if (!args.newSetting || args.newSetting.length < 1) {
+                return message.reply(`Logging is: ${settings.guildlogActive}`);
+            } else {
+                await this.client.updateGuild(message.guild, { guildLogActive: false });
+                message.reply('Logging has been deactivated');
             }
             break;
         }
