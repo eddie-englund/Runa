@@ -14,35 +14,15 @@ class RulesCommand extends Command {
         });
     }
 
-    exec(message) {
-        const today = new Date();
+    async exec(message) {
+        const Guild = await this.client.getGuild(message.guild);
+        const embed = await this.client.rulesEmbed(message, Guild);
 
-        this.client.model.Guild.findOne(
-            {
-                guildID: message.guild.id
-            },
-            (err, res) => {
-                if (err) this.client.logger.error({ event: 'error' }`${err}`);
-                if (!res) {
-                    return message.reply('This guild has not set any rules.');
-                } else if (
-                    res.guildRules.length === 0
-                    || res.guildRules.length < 1
-                    || !res.guildRules
-                ) {
-                    return message.reply('This guild has not set any rules.');
-                }
-                const embed = this.client.util
-                    .embed()
-                    .setColor(this.client.color.blue)
-                    .setAuthor(message.author.username, message.author.displayAvatarURL())
-                    .setTitle('Guild rules')
-                    .setDescription(res.guildRules)
-                    .setThumbnail(message.guild.iconURL())
-                    .setTimestamp(today);
-                return message.channel.send(embed);
-            }
-        );
+        if (!Guild.guildRules || Guild.guildRules < 1) {
+            return message.reply('This guild has not set any rules!');
+        } else {
+            return message.util.send(embed);
+        }
     }
 }
 
