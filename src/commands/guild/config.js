@@ -11,14 +11,21 @@ class ConfigCommand extends Command {
                     id: 'settings'
                 },
                 {
-                    id: 'newSetting'
+                    id: 'newSetting',
+                    match: 'rest'
                 }
             ],
             channel: 'guild',
             category: 'guild',
             description: {
-                content: '**shows** or **sets**guild specific settings like the prefix.',
-                usage: ['prefix <new prefix>', 'log <new log channel name>', 'startlog', 'stoplog']
+                content: '**shows** or **sets** guild specific.',
+                usage: [
+                    'prefix <new prefix>',
+                    ' log <new log channel name>',
+                    ' rules <new rules>',
+                    ' startlog',
+                    ' stoplog'
+                ]
             }
         });
     }
@@ -28,7 +35,7 @@ class ConfigCommand extends Command {
 
         switch (args.settings) {
         case 'prefix': {
-            if (!args.newSetting || args.newSetting.lenth < 1) {
+            if (!args.newSetting) {
                 return message.util.send(`Current prefix is: \`\`${settings.prefix}\`\``);
             }
             try {
@@ -42,8 +49,8 @@ class ConfigCommand extends Command {
             break;
         }
         case 'log': {
-            if (!args.newSetting || args.newSetting.length < 1) {
-                return message.util.send(`Current log chanel is \`\`${settings.guildLog}`);
+            if (!args.newSetting) {
+                return message.util.send(`Current log chanel is \`\`${settings.guildLog}\`\``);
             }
 
             const cChannel = message.guild.channels

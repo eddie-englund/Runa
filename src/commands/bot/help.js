@@ -81,7 +81,7 @@ class HelpCommand extends Command {
                 .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
                 .setColor(this.client.color.blue)
                 .setThumbnail(this.client.user.displayAvatarURL())
-                .addField('Prefix in this guild is:', prefix)
+                .addField('Prefix in this guild is:', `**\`\`${prefix}\`\`**`)
                 .addField('Commands:', [
                     'To view the details of a command, do @Runa help <command>.'
                 ]);

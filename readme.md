@@ -44,12 +44,15 @@ To start the bot run `pm2 start bot.js`
 
 ### Guild specific
 
-- **setRules:** lets guild owner or admin set guild rules (max char length is 6000)
 - **rules:** lets guild member see the set rules (if there is any).
 - **lookup:** Looks up the mentioned user.
 - **bans:** Sends info about how many bans the guild has banned with the bot and the latest user to get banned
-- **config:** Lets user either see or change guild specific settings, like log channel and prefix.
-  b
+- **config:** Lets user either see or change guild specific settings. You can change or see:
+  - rules
+  - prefix
+  - log (channel)
+  - startlog
+  - stop log
 
 ## Author
 
