@@ -4,6 +4,7 @@
 
 [![Licence](https://img.shields.io/github/license/TitusEntertainment/Runa.svg)](https://github.com/TitusEntertainment/Runa/blob/master/LICENSE.md)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5d4923eafc24cb2bdd5fc89b36be712)](https://app.codacy.com/app/TitusEntertainment/Runa?utm_source=github.com&utm_medium=referral&utm_content=TitusEntertainment/Runa&utm_campaign=Badge_Grade_Dashboard)
+[![CodeFactor](https://www.codefactor.io/repository/github/titusentertainment/runa/badge)](https://www.codefactor.io/repository/github/titusentertainment/runa)
 [![Build Status](https://www.travis-ci.org/TitusEntertainment/Runa.svg?branch=master)](https://www.travis-ci.org/TitusEntertainment/Runa)
 [![Discord Server](https://discordapp.com/api/guilds/585164156710158337/embed.png)](https://discord.gg/jQ9cN55)
 
