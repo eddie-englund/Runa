@@ -11,8 +11,8 @@ module.exports = client => {
         else return client.config.defaultSettings;
     };
 
-    client.getUser = async user => {
-        const data = await User.findOne({ userID: user.id });
+    client.getUser = async (guild, user) => {
+        const data = await User.findOne({ userID: user.id, guildID: guild.id });
         if (data) return data;
         else throw new Error('Failed to supply valid user data');
     };
