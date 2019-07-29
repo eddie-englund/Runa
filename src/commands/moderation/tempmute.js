@@ -71,11 +71,11 @@ class TempMuteCommand extends Command {
             .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been muted for ${args.time}`,
-                args.member.user.displayAvatarURL
+                args.member.user.displayAvatarURL()
             )
             .addField('**Reason**:', args.reason, true)
             .addField('**Mute time**:', args.time, true)
-            .setThumbnail(this.client.user.displayAvatarURL)
+            .setThumbnail(this.client.user.displayAvatarURL())
             .setTimestamp(today);
 
         const embed = this.client.util
@@ -83,7 +83,7 @@ class TempMuteCommand extends Command {
             .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been muted`,
-                args.member.user.displayAvatarURL
+                args.member.user.displayAvatarURL()
             )
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)

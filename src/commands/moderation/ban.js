@@ -56,11 +56,13 @@ class banCommand extends Command {
             date: today
         };
 
-        await this.client.deleteUser(args.member.user);
+        await this.client.deleteUser(message.guild, args.member.user);
         const Guild = await this.client.getGuild(message.guild);
         const newBans = Guild.bans += 1;
         await this.client.updateGuild(message.guild, { bans: newBans, guildBans: [banInfo] });
-        return args.member.ban({ days: 3, reason: args.reason }).then(this.client.msg(message, embed));
+        return args.member
+            .ban({ days: 3, reason: args.reason })
+            .then(this.client.msg(message, embed));
     }
 }
 

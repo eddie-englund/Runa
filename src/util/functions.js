@@ -17,8 +17,8 @@ module.exports = client => {
         else throw new Error('Failed to supply valid user data');
     };
 
-    client.deleteUser = async user => {
-        const data = await User.deleteOne({ userID: user.id });
+    client.deleteUser = async (guild, user) => {
+        const data = await User.deleteOne({ userID: user.id, guildID: guild.id });
         if (data) return data;
         else throw new Error('Failed to supply valid user data');
     };

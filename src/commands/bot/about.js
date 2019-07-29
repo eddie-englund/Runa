@@ -4,7 +4,7 @@ const { Command } = require('discord-akairo');
 class AboutCommand extends Command {
     constructor() {
         super('about', {
-            aliases: ['about', 'bot', 'runa'],
+            aliases: ['about', 'bot', 'runa', 'info'],
             clientPermissions: ['SEND_MESSAGES'],
             userPermissions: ['SEND_MESSAGES'],
             category: 'bot',
@@ -29,7 +29,7 @@ class AboutCommand extends Command {
                     'You can read more about me here: https://github.com/TitusEntertainment/Runa',
                     '',,
 
-                    'By default the prefix that I react to is: **!**',
+                    `By default the prefix that I react to is: **!**, the prefix in this guild is **${prefix}**`,
                     '',
                     `To get help with commands write **@runa help** or **${prefix}help**.`,
                     ''

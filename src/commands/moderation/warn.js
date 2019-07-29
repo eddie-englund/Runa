@@ -39,7 +39,7 @@ class warnCommand extends Command {
             .setColor(this.client.color.blue)
             .setAuthor(
                 `${args.member.user.username} has been warned`,
-                args.member.user.displayAvatarURL
+                args.member.user.displayAvatarURL()
             )
             .addField('**UserID**:', args.member.user.id, true)
             .addField('**Username**:', args.member.user.username, true)
@@ -53,7 +53,7 @@ class warnCommand extends Command {
             .setColor(this.client.color.blue)
             .setAuthor(
                 `Kicked user ${args.member.user.username}`,
-                args.member.user.displayAvatarURL
+                args.member.user.displayAvatarURL()
             )
             .addField('**User**:', args.member.user.username, true)
             .addField('**UserID**:', args.member.user.id, true)
@@ -67,7 +67,7 @@ class warnCommand extends Command {
             .setColor(this.client.color.blue)
             .setAuthor(
                 `Banned user ${args.member.user.username}`,
-                args.member.user.displayAvatarURL
+                args.member.user.displayAvatarURL()
             )
             .addField('**User**:', args.member.user.username, true)
             .addField('**UserID**:', args.member.user.id, true)

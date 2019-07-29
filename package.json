@@ -1,12 +1,12 @@
 {
-  "name": "yamete_bot",
-  "version": "0.0.1",
+  "name": "runa",
+  "version": "1.0.0",
   "description": "A discord moderation bot",
   "main": "bot.js",
   "scripts": {
     "test": "test --passWithNoTests"
   },
-  "repository": "https://github.com/TitusEntertainment/Yamete-The-Moderation-Bot.git",
+  "repository": "https://github.com/TitusEntertainment/Runa",
   "author": "Titus",
   "license": "MIT",
   "dependencies": {
@@ -17,6 +17,7 @@
     "lodash": "4.17.15",
     "mongoose": "^5.6.3",
     "ms": "^2.1.2",
+    "nodemon": "^1.19.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {

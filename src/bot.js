@@ -17,6 +17,14 @@ class RunaClient extends AkairoClient {
             }
         );
 
+        this.mongoose = require('./util/mongoose');
+        this.color = require('./util/colors.js');
+        this.log = require('./util/log');
+        this.msg = require('./util/msg');
+        this.logger = require('./util/winston');
+        this.config = require('./util/config');
+        this.model = require('./models/index');
+
         this.commandHandler = new CommandHandler(this, {
             // Per guild prefix
             prefix: async msg => {
@@ -40,14 +48,6 @@ class RunaClient extends AkairoClient {
     }
 }
 const client = new RunaClient();
-// Util
-client.mongoose = require('./util/mongoose');
-client.color = require('./util/colors.js');
-client.log = require('./util/log');
-client.msg = require('./util/msg');
-client.logger = require('./util/winston');
-client.config = require('./util/config');
-client.model = require('./models/index');
 require('./util/functions')(client);
 require('./util/embeds')(client);
 

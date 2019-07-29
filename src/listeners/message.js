@@ -10,8 +10,7 @@ class MessageEvent extends Listener {
     }
 
     exec(message) {
-        // eslint-disable-next-line no-unused-vars
-        if (message.author.bot) return;
+        if (message.author.bot || !message.guild) return;
     }
 }
 

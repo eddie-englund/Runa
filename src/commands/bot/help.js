@@ -27,7 +27,6 @@ class HelpCommand extends Command {
 
     exec(message, { command }) {
         if (!command) return this.execCommandList(message);
-        // eslint-disable-next-line prefer-const
         this.handler.prefix(message).then(e => {
             const prefix = e;
             // eslint-disable-next-line no-undef
